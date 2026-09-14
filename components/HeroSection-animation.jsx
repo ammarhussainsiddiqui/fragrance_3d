@@ -2,27 +2,27 @@
 
 import { useEffect, useRef, useContext } from 'react';
 import { Canvas } from '@react-three/fiber';
-import Model from './model';
+import PerfumeBottle from './PerfumeBottle';
 import gsap from 'gsap';
 import { motion } from 'framer-motion';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollerContext } from '../lib/ScrollerContext';
-import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { useRouter } from 'next/navigation';
+import { brand } from '../lib/brand';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function HeroSectionAnimation({
-  title = "Chemist",
-  description = "Connecting top-tier Cosmetic Chemists and Formulators with innovative brands to create exceptional products.",
-  ctaLabel = "Start Innovating",
-  title2 = "What We Do",
-  description2 = "We are a leading platform that connects top-tier Cosmetic Chemists and Formulators with brands and organizations.",
+  title = "Eau de Parfum",
+  description = "Numbered eaux de parfum composed in small editions — rare naturals, quiet structure, and a trail that lingers long after you have left the room.",
+  ctaLabel = "Discover the Collection",
+  title2 = "The House",
+  description2 = "Maison Sillage composes fragrance the way a couturier cuts cloth: with restraint, precision and an obsession with material. Each edition is built around a single rare natural and finished by hand.",
   features = [
-    { title: "Expert Network", description: "Access to industry-leading professionals" },
-    { title: "Regulatory Expertise", description: "Assisting in the quality and regulatory areas" },
-    { title: "Innovation Focus", description: "Driving product excellence through chemistry" },
-    { title: "Passionate Team", description: "Our team thrives on helping your brand explode" },
+    { title: "Rare Naturals", description: "Sourced from a small circle of growers and distillers" },
+    { title: "Composed by Hand", description: "Every edition finished and numbered in our atelier" },
+    { title: "Lasting Sillage", description: "Concentrated extraits with a trail that lingers" },
+    { title: "Considered Craft", description: "Refillable flacons in glass and metal, nothing else" },
   ],
 }) {
   const section1Ref = useRef(null);
@@ -47,7 +47,7 @@ export function HeroSectionAnimation({
     transition: { duration: 8, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' },
   };
 
-  
+
   useEffect(() => {
     if (!modalRef.current) return;
     const scroller = scrollerRef?.current || window;
@@ -68,8 +68,8 @@ export function HeroSectionAnimation({
         position: 'fixed',
         top: '50%',
         left: '45%',
-        x: '-70%',
-        y: '-40%',
+        x: '-38%',
+        y: '-42%',
         scale: 1.1,
         rotation: 320,
         opacity: 1,
@@ -132,44 +132,49 @@ export function HeroSectionAnimation({
   }, []);
 
   return (
-    <main className='scroll-smooth bg-black no-scrollbar overflow-x-hidden' style={{ zIndex: -9999, pointerEvents: 'all' }}>
+    <main className='scroll-smooth bg-ink no-scrollbar overflow-x-hidden' style={{ zIndex: -9999, pointerEvents: 'all' }}>
 
       {/* ================= 3D MODEL CONTAINER ================= */}
       <div ref={modalRef} className="will-change-transform" style={{ pointerEvents: 'none' }}>
-        <Canvas shadows style={{ pointerEvents: 'none' }}>
-          {/* <PerspectiveCamera makeDefault position={[15, 0, 0]} fov={20} /> */}
-          <ambientLight intensity={0.4} />
-          <directionalLight position={[8, 8, 10]} intensity={1.8} />
-          {/* <OrbitControls enableZoom={false} enablePan={false} /> */}
-          {/* <Environment preset="city" /> */}
+        <Canvas
+          shadows
+          style={{ pointerEvents: 'none' }}
+          gl={{ antialias: true, alpha: true }}
+          // the wrapper is rotated/scaled by GSAP; measure its untransformed box
+          resize={{ offsetSize: true }}
+        >
+          <ambientLight intensity={0.35} />
+          <directionalLight position={[8, 8, 10]} intensity={1.4} color="#fff6e8" />
+          <directionalLight position={[-6, 3, -4]} intensity={0.8} color="#cdb98e" />
 
-          <Model
-            modelPath="/images/green_hero.glb"
-            scale={1.8}
-            position={[0, 0.7, -0.2]}
+          <PerfumeBottle
+            variant="amber"
+            scale={2}
+            position={[0, 0, 0]}
+            quality="high"
           />
         </Canvas>
       </div>
 
       {/* ================= SECTION 1 ================= */}
-      <section ref={section1Ref} className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black mb-10">
+      <section ref={section1Ref} className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-ink mb-10">
         <div className="relative w-full h-full">
           <video
             ref={videoRef}
-            style={{ transform: 'rotate(2deg) scale(0.8)' }}
+            style={{ transform: 'rotate(2deg) scale(0.8)', filter: 'grayscale(1) sepia(0.45) brightness(0.6) contrast(1.15)', mixBlendMode: 'screen' }}
             autoPlay loop muted playsInline
             className="absolute inset-0 w-full h-full object-contain z-0"
           >
             <source src="/videos/Pink-hero-bg.mp4" type="video/mp4" />
           </video>
-          <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black to-transparent z-5"></div>
+          <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-ink to-transparent z-5"></div>
         </div>
 
         {/* Dual Layered Headers */}
         {[1, 2].map((layer) => (
           <div key={layer} className={`absolute inset-0 flex items-center justify-center w-full pt-1 sm:pt-0 ${layer === 1 ? 'z-10' : 'z-30'}`}>
             <motion.h1
-              className="text-[4.5rem] sm:text-[6rem] md:text-[9rem] lg:text-[12rem] xl:text-[15rem] font-black text-center select-none w-full px-4"
+              className="font-display italic font-normal text-[4.5rem] sm:text-[6rem] md:text-[9rem] lg:text-[12rem] xl:text-[15rem] text-center select-none w-full px-4"
               initial={textAnimation.initial}
               animate={textAnimation.animate}
               transition={textAnimation.transition}
@@ -177,15 +182,15 @@ export function HeroSectionAnimation({
                 background: 'transparent',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
-                color: layer === 1 ? 'white' : 'transparent',
-                WebkitTextFillColor: layer === 1 ? 'white' : 'transparent',
-                WebkitTextStroke: layer === 1 ? '2px white' : '1px white',
-                lineHeight: '0.9',
-                letterSpacing: '-0.02em',
+                color: layer === 1 ? '#f4efe6' : 'transparent',
+                WebkitTextFillColor: layer === 1 ? '#f4efe6' : 'transparent',
+                WebkitTextStroke: layer === 1 ? '1px #f4efe6' : '1px rgba(244,239,230,0.75)',
+                lineHeight: '0.95',
+                letterSpacing: '-0.01em',
               }}
             >
               <div className="flex justify-center items-center">
-                <span className='tracking-wide font-light'>Cosmetic</span>
+                <span>{brand.mark}</span>
               </div>
             </motion.h1>
           </div>
@@ -193,33 +198,33 @@ export function HeroSectionAnimation({
 
         {/* Bottom Left UI */}
         <div ref={bottomLeftRef} className="absolute bottom-10 left-4 sm:left-16 lg:left-24 max-w-md z-40 space-y-6">
-          <p className="text-sm md:text-base text-white leading-relaxed">{description}</p>
+          <p className="text-sm md:text-base text-ivory/80 leading-relaxed font-light">{description}</p>
           <button
-            className="pointer-events-auto group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#FF4F7A] to-pink-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-pink-500/50 transition-all"
+            className="btn-primary pointer-events-auto group"
             onClick={() => router.push('/contact')}
           >
             <span>{ctaLabel}</span>
-            <div className="bg-white rounded-full p-1"><motion.svg className="w-4 h-4" fill="none" stroke="#ff4f7a" viewBox="0 0 24 24" style={{ rotate: -35 }}><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></motion.svg></div>
+            <motion.svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ rotate: -35 }}><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7l5 5m0 0l-5 5m5-5H6" /></motion.svg>
           </button>
         </div>
 {/* bottom-38 sm:bottom-38 md:bottom-41 right-10 */}
         {/* Bottom Right Title */}
         <div ref={bottomRightRef} className="absolute mt-60 ml-[50vw] z-30">
-          <h2 className="text-3xl md:text-5xl font-light tracking-wide text-white">{title}</h2>
+          <h2 className="font-sans text-xs md:text-sm uppercase tracking-[0.4em] text-champagne">{title}</h2>
         </div>
       </section>
 
       {/* ================= SECTION 2 ================= */}
-      <section ref={section2Ref} className="flex h-screen w-full items-center px-16 bg-black text-white relative">
+      <section ref={section2Ref} className="flex h-screen w-full items-center px-16 bg-ink text-ivory relative">
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center w-full">
           <div>
-            <h2 className="text-5xl font-black mb-6">{title2}</h2>
-            <p className="text-[16px] text-gray-300">{description2}</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <h2 className="font-display text-5xl font-normal mb-6">{title2}</h2>
+            <p className="text-[16px] text-taupe font-light leading-relaxed">{description2}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
               {features.map((feature, index) => (
                 <div key={index} className="flex items-start gap-4 p-2 pointer-events-auto">
-                  <div className="p-2 rounded-full text-[#CBFF00]">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="p-2 rounded-full text-champagne border border-champagne/30">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.25} viewBox="0 0 24 24">
                       {index === 0 && <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />}
                       {index === 1 && <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />}
                       {index === 2 && <path d="M13 10V3L4 14h7v7l9-11h-7z" />}
@@ -237,8 +242,8 @@ export function HeroSectionAnimation({
                     </svg>
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-white">{feature.title}</h4>
-                    <p className="text-gray-400 text-sm mt-1">{feature.description}</p>
+                    <h4 className="font-sans text-sm uppercase tracking-[0.18em] text-ivory">{feature.title}</h4>
+                    <p className="text-taupe text-sm mt-2 font-light">{feature.description}</p>
                   </div>
                 </div>
               ))}
@@ -249,7 +254,7 @@ export function HeroSectionAnimation({
       </section>
 
       {/* ================= SECTION 3 ================= */}
-      <section ref={section3Ref} className="flex items-center justify-center bg-black text-black">
+      <section ref={section3Ref} className="flex items-center justify-center bg-ink text-ink">
         <h2 className="text-4xl font-bold">More Content Here</h2>
       </section>
     </main>

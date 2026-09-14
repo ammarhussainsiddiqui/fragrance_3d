@@ -17,74 +17,83 @@ export default function ServicePage() {
   // ✅ Defaults (using your commented objects)
   const DEFAULTS = {
     sectionOne: {
-      title: "Skincare, Personal Care, Hair Care",
+      title: "Eau de Parfum, Extrait, Discovery",
       description:
-        "At CosmeticChemist.com, we’re not your average lab coat brigade. We're the rogue cosmetic chemists rewriting the rules of beauty science—pushing boundaries with formulations that disrupt, innovate, and dominate. As premier cosmetic chemists and a full-spectrum cosmetic formulator, we blend artistry with hardcore R&D to birth products that don’t just sell; they ignite obsessions.",
+        "Maison Sillage is not a fragrance factory. We are a small atelier of perfumers composing with restraint — working the quiet limits of rare naturals to make eaux de parfum that do not shout, but linger. From the first sketch to the numbered flacon, every edition is built by hand.",
       tags: [
-        "Creams",
-        "Lotions",
-        "Anti-Aging",
-        "Balms",
-        "Face Masks",
-        "Cleansers",
-        "Scrubs",
-        "Gels",
-        "Serums",
-        "Body Wash",
-        "Deodorant",
-        "Shampoo",
-        "Conditioner",
-        "Hair Mask",
-        "Hair Serum",
-        "Hair Oils",
-        "Lip balms",
+        "Eau de Parfum",
+        "Extrait de Parfum",
+        "Eau de Toilette",
+        "Discovery Sets",
+        "Bespoke Signature",
+        "Private Label",
+        "Woody",
+        "Floral",
+        "Amber",
+        "Oud",
+        "Citrus",
+        "Musk",
+        "Chypre",
+        "Fougère",
+        "Gourmand",
+        "Home Fragrance",
+        "Candles",
         "and more",
       ],
       statement:
-        "The global skincare market is expected to add another $70+ Billion in size within the next 5 years.",
+        "The global niche fragrance market is expected to add another $10+ billion in size within the next 5 years.",
     },
     sectionTwo: {
-      title: "Color Cosmetics, Oral Care, OTC, Other Products",
+      title: "Bespoke, Private Label, Home Fragrance",
       description:
-        "Our edge? Unyielding expertise in custom personal care and skincare manufacturing, from zero to shelf-ready. We craft everything: luxurious serums that defy gravity, balms that heal with a bite, masks that detox like a revolution. Got a wild idea for clean, cruelty- free disruptors? Our in-house lab turns concepts into scalable realities—stable, compliant, and crave-worthy. We source premium actives, raw material perfection, and scale production without compromising the mothership.",
+        "Our edge? An obsession with material. We source rare naturals directly, compose in small batches and finish every flacon by hand. Have an idea for a signature scent, a boutique exclusive or a scented space? The atelier turns it into a stable, compliant, quietly unforgettable composition — top, heart and base notes balanced until the trail is right.",
       tags: [
-        "Toothpaste",
-        "Mouth Rinse",
-        "Oral Gels",
-        "Liquid Lipstick",
-        "Face Masks",
-        "Cleansers",
-        "Scrubs",
-        "Gels",
-        "Serums",
-        "Body Wash",
-        "Deodorant",
-        "Shampoo",
-        "Conditioner",
-        "Hair Mask",
-        "Hair Serum",
-        "Hair Oils",
-        "Lip balms",
+        "Signature Scents",
+        "Boutique Exclusives",
+        "Wedding Editions",
+        "Hotel & Ambient Scenting",
+        "Candles",
+        "Room Sprays",
+        "Solid Perfume",
+        "Hair Mist",
+        "Body Oil",
+        "Layering Sets",
+        "Refills",
         "and more",
       ],
       statement:
-        "Why settle for vanilla when you can go volkanic? Partner with us for agile prototyping, regulatory wizardry, and manufacturing muscle that outpaces the pack. Whether indie brands or global giants, we amplify your vision into an innovative reality.",
+        "Why settle for a trend when you can wear a signature? Partner with the atelier for bespoke composition, considered packaging and a fragrance that is yours alone.",
     },
     processSteps: [
       {
         stepNumber: "One",
         stepTitle: "Step One",
-        stepDescription: "Default step description.",
+        stepDescription: "The brief — we listen for the memory, the place and the mood you want to wear.",
       },
       {
         stepNumber: "Two",
         stepTitle: "Step Two",
-        stepDescription: "Default step description.",
+        stepDescription: "Materials — we select the rare naturals and accords that will carry the composition.",
       },
       {
         stepNumber: "Three",
         stepTitle: "Step Three",
-        stepDescription: "Default step description.",
+        stepDescription: "Composition — modifications, rest and refinement until the sillage is exactly right.",
+      },
+      {
+        stepNumber: "Four",
+        stepTitle: "Step Four",
+        stepDescription: "Maturation — the composition rests for weeks so the materials settle and marry.",
+      },
+      {
+        stepNumber: "Five",
+        stepTitle: "Step Five",
+        stepDescription: "The flacon — glass, collar and label, considered as carefully as the juice itself.",
+      },
+      {
+        stepNumber: "Six",
+        stepTitle: "Step Six",
+        stepDescription: "Numbering — each flacon is filled, sealed and numbered by hand in the atelier.",
       },
     ],
   };
@@ -171,7 +180,7 @@ export default function ServicePage() {
   // ...rest of your component render (use sectionOne, sectionTwo, processSteps)
 
   return (
-    <main className="w-full bg-black overflow-x-hidden h-screen overflow-scroll no-scrollbar pt-20" style={{ scrollBehavior: "smooth" }}>
+    <main className="w-full bg-ink overflow-x-hidden h-screen overflow-scroll no-scrollbar pt-20" style={{ scrollBehavior: "smooth" }}>
       <ProductDetailSection side="right" content={sectionOne} />
       <ProductDetailSectiontwo side="left" content={sectionTwo} />
       <SpiderDetail processSteps={processSteps} />

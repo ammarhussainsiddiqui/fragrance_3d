@@ -18,34 +18,20 @@ export default function CallToAction({
     >
       <div className="w-full">
         <div
-          className="w-full  rounded-3xl border-2 border-transparent bg-gradient-to-b from-black to-black p-8 relative shadow-2xl"
-          style={{
-            backgroundImage: "linear-gradient(black, black), linear-gradient(135deg, #ec4899, #f43f5e)",
-            backgroundOrigin: "border-box",
-            backgroundClip: "padding-box, border-box",
-            boxShadow: "0 0 30px rgba(236, 72, 153, 0.5), 0 0 60px rgba(244, 63, 94, 0.3)",
-          }}
+          className="w-full rounded-3xl border border-champagne/40 bg-ink-soft/50 p-10 md:p-14 relative"
         >
-          <div className="text-center space-y-4">
+          <div className="text-center space-y-5">
             {/* Main heading */}
-            <h1 className="text-white text-2xl font-light leading-relaxed">{heading}</h1>
+            <h1 className="font-display text-ivory text-2xl md:text-3xl font-normal leading-relaxed">{heading}</h1>
 
-            {/* Brand name with gradient effect */}
-            <p
-              className="text-lg font-medium"
-              style={{
-                background: "linear-gradient(135deg, #ec4899, #f43f5e)",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
+            {/* Brand name */}
+            <p className="font-sans text-xs uppercase tracking-[0.35em] text-champagne">
               {brandName}
 
             </p>
 
             {/* Tagline */}
-            <p className="text-gray-300 text-sm font-light">{tagline}</p>
+            <p className="text-taupe text-sm font-light italic font-display text-base">{tagline}</p>
           </div>
         </div>
       </div>

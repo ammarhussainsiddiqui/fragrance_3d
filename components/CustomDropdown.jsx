@@ -25,18 +25,18 @@ export function CustomDropdown({ dropdownValue, name, label }) {
           e.preventDefault();
           setIsOpen(!isOpen);
         }}
-        className={`relative w-full px-6 py-3 rounded-4xl bg-[#161616] from-[#161616] to-[#161616] border border-neutral-800 text-left text-foreground font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 focus:ring-offset-background ${isOpen ? "border-neutral-700 shadow-lg shadow-neutral-900/50" : ""
-          }`}
+        className={`field text-left transition-all duration-200 ${isOpen ? "border-champagne" : ""}`}
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            {SelectedIcon && <SelectedIcon className="h-5 w-5 text-neutral-400" />}
-            <span className={selectedProject ? "text-foreground" : "text-muted-foreground"}>
+            {SelectedIcon && <SelectedIcon className="h-5 w-5 text-taupe" />}
+            <span className={selectedProject ? "text-ivory" : "text-stone"}>
               {selectedProject?.label ?? label}
             </span>
           </div>
           <ChevronDown
-            className={`h-5 w-5 text-muted-foreground transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+            strokeWidth={1.5}
+            className={`h-4 w-4 text-taupe transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
           />
         </div>
       </button>
@@ -48,7 +48,7 @@ export function CustomDropdown({ dropdownValue, name, label }) {
           <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)} />
 
           {/* Menu Content */}
-          <div className="absolute h-56  z-20 w-full mt-2   overflow-y-scroll bg-gradient-to-br from-[#161616] via-[#161616] to-[#161616] border border-neutral-800 rounded-2xl shadow-2xl shadow-neutral-950/80 overflow-hidden animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-200">
+          <div className="absolute h-56  z-20 w-full mt-2   overflow-y-scroll bg-ink-soft border border-ivory/10 rounded-xl shadow-2xl shadow-black/60 overflow-hidden animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-200">
             <div className="p-2">
               {dropdownValue.map((type, index) => {
                 const Icon = type.icon
@@ -56,7 +56,7 @@ export function CustomDropdown({ dropdownValue, name, label }) {
                   <button
                     key={type.value}
                     onClick={() => handleSelect(type.value)}
-                    className={`w-full px-4  py-3.5 rounded-xl flex items-center gap-3 text-left transition-all duration-150 hover:bg-neutral-800/60 hover:translate-x-1 focus:outline-none focus:bg-neutral-800/60 animate-in fade-in-0 slide-in-from-left-1 group ${selectedType === type.value ? "bg-neutral-800/80" : ""
+                    className={`w-full px-4  py-3 rounded-lg flex items-center gap-3 text-left transition-all duration-150 hover:bg-ivory/5 hover:translate-x-1 focus:outline-none focus:bg-ivory/5 animate-in fade-in-0 slide-in-from-left-1 group ${selectedType === type.value ? "bg-ivory/10" : ""
                       }`}
                     style={{
                       animationDelay: `${index * 30}ms`,
@@ -64,9 +64,9 @@ export function CustomDropdown({ dropdownValue, name, label }) {
                     }}
                   >
                     {/* <Icon className="h-5 w-5 text-neutral-400 transition-transform duration-200 group-hover:scale-110" /> */}
-                    <span className="text-foreground font-medium">{type.label}</span>
+                    <span className="text-ivory font-light">{type.label}</span>
                     {selectedType === type.value && (
-                      <ChevronDown className="ml-auto h-4 w-4 text-neutral-400 -rotate-90" />
+                      <ChevronDown className="ml-auto h-4 w-4 text-champagne -rotate-90" />
                     )}
                   </button>
                 )
@@ -74,7 +74,7 @@ export function CustomDropdown({ dropdownValue, name, label }) {
             </div>
 
             {/* Decorative gradient border at bottom */}
-            <div className="h-px bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
+            <div className="h-px bg-gradient-to-r from-transparent via-champagne/40 to-transparent" />
           </div>
         </>
       )}

@@ -4,6 +4,7 @@ import { FinalSection } from "../../components/FinalSection"
 import Footer from "../../components/Footer"
 import { useGetService } from "../../lib/getService";
 import Loader from "../../components/Loader";
+import { brand } from "../../lib/brand";
 
 export default function CookiePolicy() {
     const { data: pageData, loading } = useGetService(
@@ -101,26 +102,26 @@ export default function CookiePolicy() {
     }
 
     return (
-        <div className="h-screen bg-black text-white">
+        <div className="h-screen bg-ink text-ivory">
             <section className="w-full pt-24 pb-16 px-4 sm:px-6">
                 <div className="max-w-4xl mx-auto">
                     <div className="text-center mb-12">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-4 font-heading">
+                        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal mb-4">
                             {sectionOne?.title}
                         </h1>
-                        <p className="text-pink-400">{sectionOne?.description}</p>
+                        <p className="text-champagne font-sans text-xs uppercase tracking-[0.25em]">{sectionOne?.description}</p>
                     </div>
 
-                    <div className="space-y-8 text-gray-300">
-                        <div className="bg-[#111]/60 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 rounded-2xl">
-                            <h2 className="text-2xl font-semibold mb-4 text-white">{sectionTwo?.title}</h2>
+                    <div className="space-y-8 text-taupe font-light">
+                        <div className="bg-ink-soft/60 border border-ivory/10 p-6 sm:p-8 rounded-2xl">
+                            <h2 className="font-display text-2xl font-normal mb-4 text-ivory">{sectionTwo?.title}</h2>
                             <p className="mb-2">
                                 {sectionTwo?.description}
                             </p>
                         </div>
 
-                        <div className="bg-[#111]/60 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 rounded-2xl">
-                            <h2 className="text-2xl font-semibold mb-4 text-white">{sectionThree?.title}</h2>
+                        <div className="bg-ink-soft/60 border border-ivory/10 p-6 sm:p-8 rounded-2xl">
+                            <h2 className="font-display text-2xl font-normal mb-4 text-ivory">{sectionThree?.title}</h2>
                             <p className="mb-4">{sectionThree?.description}</p>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li>{sectionThree?.description2}</li>
@@ -130,22 +131,22 @@ export default function CookiePolicy() {
                             </ul>
                         </div>
 
-                        <div className="bg-[#111]/60 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 rounded-2xl">
-                            <h2 className="text-2xl font-semibold mb-4 text-white">{sectionFour?.title}</h2>
+                        <div className="bg-ink-soft/60 border border-ivory/10 p-6 sm:p-8 rounded-2xl">
+                            <h2 className="font-display text-2xl font-normal mb-4 text-ivory">{sectionFour?.title}</h2>
 
-                            <h4 className="text-2xl font-semibold mb-4 text-white">{sectionFive?.title}</h4>
+                            <h4 className="font-display text-xl mb-4 text-ivory">{sectionFive?.title}</h4>
                             <p>
                                 {sectionFive?.description}
                             </p>
 
-                            <h4 className="text-2xl font-semibold mb-4 text-white">{sectionSix?.title}</h4>
+                            <h4 className="font-display text-xl mb-4 mt-6 text-ivory">{sectionSix?.title}</h4>
                             <p>
                                 {sectionSix?.description}
                             </p>
                         </div>
 
-                        <div className="bg-[#111]/60 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 rounded-2xl">
-                            <h2 className="text-2xl font-semibold mb-4 text-white">{sectionSeven?.title}</h2>
+                        <div className="bg-ink-soft/60 border border-ivory/10 p-6 sm:p-8 rounded-2xl">
+                            <h2 className="font-display text-2xl font-normal mb-4 text-ivory">{sectionSeven?.title}</h2>
                             <p className="mb-4">{sectionSeven?.description}</p>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li>{sectionSeven?.description2}</li>
@@ -156,25 +157,25 @@ export default function CookiePolicy() {
                             <p>{sectionThree?.description5}</p>
                         </div>
 
-                        <div className="bg-[#111]/60 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 rounded-2xl">
-                            <h2 className="text-2xl font-semibold mb-4 text-white">{sectionEight?.title}</h2>
+                        <div className="bg-ink-soft/60 border border-ivory/10 p-6 sm:p-8 rounded-2xl">
+                            <h2 className="font-display text-2xl font-normal mb-4 text-ivory">{sectionEight?.title}</h2>
                             <p>
                                 {sectionEight?.description}
                             </p>
                         </div>
 
-                        <div className="bg-[#111]/60 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 rounded-2xl">
-                            <h2 className="text-2xl font-semibold mb-4 text-white">{sectionNine?.title}</h2>
+                        <div className="bg-ink-soft/60 border border-ivory/10 p-6 sm:p-8 rounded-2xl">
+                            <h2 className="font-display text-2xl font-normal mb-4 text-ivory">{sectionNine?.title}</h2>
                             <p className="mb-4">{sectionNine?.description}</p>
                             <div className="space-y-2">
                                 <p className="flex items-center">
-                                    <span className="text-pink-400 mr-2">Email:</span> {sectionTen?.title || "sales@cosmeticchemist.com"}
+                                    <span className="text-champagne mr-2">Email:</span> {sectionTen?.title || brand.email}
                                 </p>
                                 <p className="flex items-center">
-                                    <span className="text-pink-400 mr-2">Phone:</span> {sectionEleven?.title}
+                                    <span className="text-champagne mr-2">Phone:</span> {sectionEleven?.title}
                                 </p>
                                 <p className="flex items-center">
-                                    <span className="text-pink-400 mr-2">Address:</span> {sectiontweleve?.title}
+                                    <span className="text-champagne mr-2">Address:</span> {sectiontweleve?.title}
                                 </p>
                             </div>
                         </div>

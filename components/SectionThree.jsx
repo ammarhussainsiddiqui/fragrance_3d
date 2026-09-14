@@ -2,21 +2,21 @@
 
 import { useEffect, useRef, useContext } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Environment } from '@react-three/drei';
-import Model from './model';
+import { OrbitControls } from '@react-three/drei';
+import PerfumeBottle from './PerfumeBottle';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollerContext } from '../lib/ScrollerContext';
 import { useRouter } from 'next/navigation';
 
 export function SectionThree({
-  title = "We are your",
-  highlightedTitle = "one-stop shop",
-  subtitle = "for everything cosmetic",
-  ctaLabel = "Get Started",
-  description = `Our team is also well experienced with all regulatory and quality assurance matters.
-Not only that but we are also passionate about design and branding and love to help brands out with that.
-We guarantee you've never come across a more well-rounded team of experts than at CosmeticChemist.com.`
+  title = "A single",
+  highlightedTitle = "signature",
+  subtitle = "for every occasion",
+  ctaLabel = "Book a Consultation",
+  description = `From a first eau de parfum to a bespoke composition made for one person alone, the atelier accompanies you at every step.
+We advise on notes, concentration and ritual — and finish each flacon by hand.
+You will not find a more considered fragrance house than Maison Sillage.`
 }) {
   const router = useRouter();
 
@@ -85,7 +85,7 @@ We guarantee you've never come across a more well-rounded team of experts than a
       className="relative min-h-screen flex items-center justify-center px-12 md:px-16 snap-start overflow-hidden"
     >
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-ink/50" />
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full justify-between">
         {/* LEFT — 3D MODEL */}
@@ -96,41 +96,34 @@ We guarantee you've never come across a more well-rounded team of experts than a
             backgroundImage: `
               radial-gradient(
                 circle at center,
-                rgba(0,0,0,0.3) 0%,
-                rgba(0,0,0,0.6) 70%,
-                rgba(0,0,0,0.9) 100%
+                rgba(14,13,11,0.35) 0%,
+                rgba(14,13,11,0.7) 70%,
+                rgba(14,13,11,0.95) 100%
               ),
               url('/images/35.png')
             `,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundBlendMode: 'multiply',
-            boxShadow: 'inset 0 0 40px 25px rgba(0,0,0,0.75)',
+            boxShadow: 'inset 0 0 40px 25px rgba(14,13,11,0.8)',
           }}
         >
           <Canvas
             camera={{ position: [0, 2, 8], fov: 25 }}
             style={{ width: '100%', height: '100%' }}
+            gl={{ alpha: true, antialias: true }}
           >
-            <ambientLight intensity={0.55} />
+            <ambientLight intensity={0.3} />
+            <directionalLight position={[6, 6, 12]} intensity={1.2} color="#fff6e8" />
+            <directionalLight position={[-6, 2, 10]} intensity={0.6} />
+            <directionalLight position={[0, -3, -10]} intensity={0.8} color="#cdb98e" />
 
-            <directionalLight position={[6, 6, 12]} intensity={2} />
-            <directionalLight position={[-6, 2, 10]} intensity={1} />
-            <directionalLight position={[0, -3, -10]} intensity={1.4} />
-            <directionalLight position={[0, 10, 5]} intensity={0.8} />
-
-            <hemisphereLight
-              skyColor="#ffffff"
-              groundColor="#666666"
-              intensity={0.5}
-            />
-
-            <Environment preset="city" />
-            <Model
-              modelPath="/images/SilverVerticalTube.compressed.glb"
-              scale={1.5}
+            <PerfumeBottle
+              variant="vert"
+              scale={0.9}
               position={[0, 0, 0]}
               rotation={[0, 0.4, 0]}
+              quality="low"
             />
 
             <OrbitControls
@@ -147,16 +140,16 @@ We guarantee you've never come across a more well-rounded team of experts than a
           ref={rightContentRef}
           className="space-y-6 md:px-4 order-1 lg:order-2"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white">
+          <h2 className="font-display text-4xl md:text-5xl font-normal leading-tight text-ivory">
             {title}{' '}
-            <span className="text-pink-400">{highlightedTitle}</span>{' '}
+            <span className="italic text-champagne">{highlightedTitle}</span>{' '}
             {subtitle}
           </h2>
 
           {description
-            ?.split(/<br\s*\/?>/gi)
+            ?.split(/<br\s*\/?>|\n/gi)
             .map((line, index) => (
-              <p key={index} className="text-gray-300">
+              <p key={index} className="text-taupe font-light leading-relaxed">
                 {line}
               </p>
             ))}
@@ -164,7 +157,7 @@ We guarantee you've never come across a more well-rounded team of experts than a
 
           <button
             onClick={() => router.push('/contact')}
-            className="px-8 py-4 bg-gradient-to-r from-[#FF4F7A] to-pink-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300"
+            className="btn-primary"
           >
             {ctaLabel}
           </button>

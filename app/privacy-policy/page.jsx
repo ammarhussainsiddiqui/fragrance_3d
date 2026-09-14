@@ -4,6 +4,7 @@ import { FinalSection } from "../../components/FinalSection"
 import Footer from "../../components/Footer"
 import { useGetService } from "../../lib/getService";
 import Loader from "../../components/Loader";
+import { brand } from "../../lib/brand";
 
 export default function PrivacyPolicy() {
     const { data: pageData, loading } = useGetService(
@@ -94,26 +95,26 @@ export default function PrivacyPolicy() {
 
 
     return (
-        <div className="h-screen bg-black text-white">
+        <div className="h-screen bg-ink text-ivory">
             <section className="w-full pt-24 pb-16 px-4 sm:px-6">
                 <div className="max-w-4xl mx-auto">
                     <div className="text-center mb-12">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-4 font-heading">
+                        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal mb-4">
                             {sectionOne?.title}
                         </h1>
-                        <p className="text-pink-400">{sectionOne?.description}</p>
+                        <p className="text-champagne font-sans text-xs uppercase tracking-[0.25em]">{sectionOne?.description}</p>
                     </div>
 
-                    <div className="space-y-8 text-gray-300">
-                        <div className="bg-[#111]/60 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 rounded-2xl">
-                            <h2 className="text-2xl font-semibold mb-4 text-white">{sectionTwo?.title}</h2>
+                    <div className="space-y-8 text-taupe font-light">
+                        <div className="bg-ink-soft/60 border border-ivory/10 p-6 sm:p-8 rounded-2xl">
+                            <h2 className="font-display text-2xl font-normal mb-4 text-ivory">{sectionTwo?.title}</h2>
                             <p className="mb-2">
                                 {sectionTwo?.description}
                             </p>
                         </div>
 
-                        <div className="bg-[#111]/60 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 rounded-2xl">
-                            <h2 className="text-2xl font-semibold mb-4 text-white">{sectionThree?.title}</h2>
+                        <div className="bg-ink-soft/60 border border-ivory/10 p-6 sm:p-8 rounded-2xl">
+                            <h2 className="font-display text-2xl font-normal mb-4 text-ivory">{sectionThree?.title}</h2>
                             <p className="mb-4">{sectionThree?.description}</p>
                             <ul className="list-disc pl-6 space-y-2">
                                 <li>{sectionThree?.description2}</li>
@@ -124,32 +125,32 @@ export default function PrivacyPolicy() {
                             </ul>
                         </div>
 
-                        <div className="bg-[#111]/60 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 rounded-2xl">
-                            <h2 className="text-2xl font-semibold mb-4 text-white">{sectionFour?.title}</h2>
+                        <div className="bg-ink-soft/60 border border-ivory/10 p-6 sm:p-8 rounded-2xl">
+                            <h2 className="font-display text-2xl font-normal mb-4 text-ivory">{sectionFour?.title}</h2>
                             <p>
                                 {sectionFour?.description}
                             </p>
                         </div>
 
-                        <div className="bg-[#111]/60 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 rounded-2xl">
-                            <h2 className="text-2xl font-semibold mb-4 text-white">{sectionFive?.title}</h2>
+                        <div className="bg-ink-soft/60 border border-ivory/10 p-6 sm:p-8 rounded-2xl">
+                            <h2 className="font-display text-2xl font-normal mb-4 text-ivory">{sectionFive?.title}</h2>
                             <p>
                                 {sectionFive?.description}
                             </p>
                         </div>
 
-                        <div className="bg-[#111]/60 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 rounded-2xl">
-                            <h2 className="text-2xl font-semibold mb-4 text-white">{sectionSix?.title}</h2>
+                        <div className="bg-ink-soft/60 border border-ivory/10 p-6 sm:p-8 rounded-2xl">
+                            <h2 className="font-display text-2xl font-normal mb-4 text-ivory">{sectionSix?.title}</h2>
                             <p className="mb-4">{sectionSix?.description}</p>
                             <div className="space-y-2">
                                 <p className="flex items-center">
-                                    <span className="text-pink-400 mr-2">Email:</span> sales@cosmeticchemist.com
+                                    <span className="text-champagne mr-2">Email:</span> {brand.email}
                                 </p>
                                 <p className="flex items-center">
-                                    <span className="text-pink-400 mr-2">Phone:</span> +1 (801) 980-1355
+                                    <span className="text-champagne mr-2">Phone:</span> {brand.phone}
                                 </p>
                                 <p className="flex items-center">
-                                    <span className="text-pink-400 mr-2">Address:</span> Bluffdale, UT 84065
+                                    <span className="text-champagne mr-2">Address:</span> {brand.address}
                                 </p>
                             </div>
                         </div>

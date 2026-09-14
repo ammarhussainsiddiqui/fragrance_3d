@@ -1,8 +1,31 @@
 @import "tailwindcss";
 
-/* globals.css */
+/* ------------------------------------------------------------------
+   Design tokens — Maison Sillage
+   Restrained fragrance palette: warm ink, ivory, taupe, champagne.
+   ------------------------------------------------------------------ */
+@theme {
+  --color-ink: #0e0d0b;
+  --color-ink-soft: #16140f;
+  --color-ink-line: #2a2620;
 
-/* Normal */
+  --color-ivory: #f4efe6;
+  --color-cream: #e9e2d4;
+  --color-taupe: #a89d8d;
+  --color-stone: #6f6659;
+
+  --color-champagne: #cdb98e;
+  --color-champagne-deep: #a8925f;
+
+  --color-charcoal: #1c1a17;
+}
+
+@theme inline {
+  --font-sans: var(--font-jost), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+}
+
+/* Brooklyn is retained only as a fallback face */
 @font-face {
   font-family: 'Brooklyn';
   src: url('/fonts/Brooklyn/Brooklyn Normal 1.otf') format('opentype');
@@ -11,139 +34,63 @@
   font-display: swap;
 }
 
-/* 
-/* Italic */
-@font-face {
-  font-family: 'Brooklyn';
-  src: url('/fonts/Brooklyn/Brooklyn Italic.otf') format('opentype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
+@layer base {
+  html,
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-ivory);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--color-champagne);
+    color: var(--color-ink);
+  }
 }
 
-/* SemiBold */
-@font-face {
-  font-family: 'Brooklyn';
-  src: url('/fonts/Brooklyn/Brooklyn SemiBold.otf') format('opentype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-3 rounded-full bg-ivory text-ink px-7 py-3.5 font-sans text-[13px] font-medium uppercase tracking-[0.14em] transition-colors duration-300 hover:bg-champagne;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-3 rounded-full border border-ivory/25 text-ivory px-7 py-3.5 font-sans text-[13px] font-medium uppercase tracking-[0.14em] transition-colors duration-300 hover:border-champagne hover:text-champagne;
+  }
+
+  .eyebrow {
+    @apply font-sans text-[11px] font-medium uppercase tracking-[0.3em] text-champagne;
+  }
+
+  .field {
+    @apply w-full bg-transparent border-0 border-b border-ivory/20 rounded-none px-0 py-3 font-sans text-ivory placeholder:text-stone outline-none transition-colors duration-300 focus:border-champagne;
+  }
+
+  .field-light {
+    @apply w-full bg-transparent border-0 border-b border-charcoal/25 rounded-none px-0 py-3 font-sans text-charcoal placeholder:text-stone outline-none transition-colors duration-300 focus:border-champagne-deep;
+  }
 }
-
-/* SemiBold Italic */
-@font-face {
-  font-family: 'Brooklyn';
-  src: url('/fonts/Brooklyn/Brooklyn SemiBoldItalic.otf') format('opentype');
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* Bold */
-@font-face {
-  font-family: 'Brooklyn';
-  src: url('/fonts/Brooklyn/Brooklyn Bold 1.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Bold Italic */
-@font-face {
-  font-family: 'Brooklyn';
-  src: url('/fonts/Brooklyn/Brooklyn BoldItalic.otf') format('opentype');
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* Heavy */
-@font-face {
-  font-family: 'Brooklyn';
-  src: url('/fonts/Brooklyn/Brooklyn Heavy 1.otf') format('opentype');
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Heavy Italic */
-@font-face {
-  font-family: 'Brooklyn';
-  src: url('/fonts/Brooklyn/Brooklyn HeavyItalic.otf') format('opentype');
-  font-weight: 800;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* Apply globally to all text */
-html,
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span,
-a,
-li,
-button {
-  font-family: 'Brooklyn', sans-serif;
-}
-
-
-body {
-  background-color: #000000;
-  /* brand-beige */
-  color: #2F2F2F;
-  /* brand-dark */
-  /* cursor: none; */
-}
-
-button {
-  cursor: pointer;
-}
-
-
-/* body::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #F5F5F5;
-}
-
-body::-webkit-scrollbar
-{
-	width: 12px;
-	background-color: #F5F5F5;
-   display: none;
-}
-
-body::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #555555;
-}
-
-
-
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-.no-scrollbar {
-  -ms-overflow-style: none;   
-  scrollbar-width: none;   
-} */
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #3a3a3a transparent;
+  scrollbar-color: var(--color-ink-line) transparent;
 }
-
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -154,7 +101,6 @@ body::-webkit-scrollbar-thumb
   scrollbar-width: none;
 }
 
-/* Chrome, Edge, Safari */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -165,11 +111,10 @@ body::-webkit-scrollbar-thumb
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #3a3a3a;
-  /* greyish-black */
+  background-color: var(--color-ink-line);
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #2a2a2a;
+  background-color: var(--color-stone);
 }

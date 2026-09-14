@@ -30,7 +30,7 @@ const AudioWave = ({ isPlaying }) => {
           <path
             key={i}
             d={getPathData(i + 1)}
-            fill={isPlaying ? "#4ade80" : "#6b7280"} // green-400 or gray-500
+            fill={isPlaying ? "#cdb98e" : "#6f6659"}
             className={`wave-bar ${isPlaying ? "animate-pulse-wave" : ""}`}
             style={{
               animationDelay: isPlaying ? `${(i + 1) * 0.1}s` : "0s",

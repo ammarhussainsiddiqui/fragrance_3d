@@ -11,6 +11,7 @@ import Footer from "../../components/Footer";
 import { useGetService } from "../../lib/getService";
 import Loader from "../../components/Loader";
 import { extractPlainText } from "../../lib/sanitizeText";
+import { brand } from "../../lib/brand";
 
 export default function AboutPage() {
   const containerRef = useRef(null);
@@ -28,12 +29,12 @@ export default function AboutPage() {
     // .filter(Boolean)
     // .join(" ");
   };
-  const pageTitle = pageData?.title || "Default Title";
+  const pageTitle = pageData?.title || "The House";
 
   // Extract hero section
   const heroSection = pageData?.hero?.richText?.root?.children || [];
-  const heroTitle = heroSection.find(child => child.tag === "h1")?.children[0]?.text || "Default Hero Title";
-  const heroDescription = heroSection.find(child => child.type === "paragraph")?.children[0]?.text || "Default Hero Description";
+  const heroTitle = heroSection.find(child => child.tag === "h1")?.children[0]?.text || "The House";
+  const heroDescription = heroSection.find(child => child.type === "paragraph")?.children[0]?.text || "A fragrance house built on restraint, rare materials and the time it takes to get a composition right.";
 
   // Extract layout blocks
   const layoutBlocks = pageData?.layout?.[0]?.columns || [];
@@ -64,28 +65,28 @@ export default function AboutPage() {
       description: blockData?.columnDescription || "Default Description",
       icon: "✨", // You can dynamically assign icons based on the section (or leave it static)
       image: blockData?.image || "/images/default-image.png", // Use extracted image or fallback to default
-      color: "#FF4D8A" // Default color, you can add logic to dynamically assign colors
+      color: "#cdb98e" // Default color, you can add logic to dynamically assign colors
     };
   });
   const layoutBlocksCTASection = pageData?.layout?.[1]?.columns || [];
 
   // Extract the required data for CallToAction
   const heading = extractPlainText(layoutBlocksCTASection[0]?.richText, ['heading'])
-    //  layoutBlocksCTASection[0]?.richText?.root?.children?.find(child => child.tag === "h4")?.children[0]?.text 
-    || "Join the elite casre shaping the future."; // Default value if not found
-  const brandLink = layoutBlocksCTASection[0]?.richText?.root?.children?.find(child => child.type === "link")?.fields?.url || "https://CosmeticChemist.com"; // Default URL if not found
-  const brandName = layoutBlocksCTASection[0]?.richText?.root?.children?.find(child => child.type === "link")?.children[0]?.text || "CosmeticChemist.com"; // Default brand name if not found
+    //  layoutBlocksCTASection[0]?.richText?.root?.children?.find(child => child.tag === "h4")?.children[0]?.text
+    || "Join the circle of those who wear a signature, not a trend."; // Default value if not found
+  const brandLink = layoutBlocksCTASection[0]?.richText?.root?.children?.find(child => child.type === "link")?.fields?.url || `https://${brand.url}`; // Default URL if not found
+  const brandName = layoutBlocksCTASection[0]?.richText?.root?.children?.find(child => child.type === "link")?.children[0]?.text || brand.url; // Default brand name if not found
   const tagline = extractPlainText(layoutBlocksCTASection[0]?.richText, ['paragraph'])
-    //  layoutBlocksCTASection[0]?.richText?.root?.children?.find(child => child.type === "paragraph" && child.children[0]?.text === "Where chemistry meets destiny.")?.children[0]?.text 
-    || "Where chemistry meets destiny."; // Default tagline if not found
+    //  layoutBlocksCTASection[0]?.richText?.root?.children?.find(child => child.type === "paragraph" && child.children[0]?.text === "Where chemistry meets destiny.")?.children[0]?.text
+    || "Where scent meets memory."; // Default tagline if not found
 
   const layoutBlocksExcellenceSection = pageData?.layout?.[2]?.columns || [];
   const excellenceHeading = extractPlainText(layoutBlocksExcellenceSection[0]?.richText, ['heading'])
-    //  layoutBlocksExcellenceSection[0]?.richText?.root?.children?.find(child => child.tag === "h2")?.children[0]?.text 
-    || "Cosmetic Chemistry Excellence";
+    //  layoutBlocksExcellenceSection[0]?.richText?.root?.children?.find(child => child.tag === "h2")?.children[0]?.text
+    || "The Art of Composition";
   const excellenceParagraph = extractPlainText(layoutBlocksExcellenceSection[0]?.richText, ['paragraph'])
-    // layoutBlocksExcellenceSection[0]?.richText?.root?.children?.find(child => child.type === "paragraph")?.children[0]?.text 
-    || "Elevate your beauty brand with our cutting-edge cosmetic chemistry lab, mastering formulations across skincare, hair care, oral care, cosmetics, personal care, and beyond. We craft innovative, safe, sustainable solutions from concept sketches to market-ready masterpieces.";
+    // layoutBlocksExcellenceSection[0]?.richText?.root?.children?.find(child => child.type === "paragraph")?.children[0]?.text
+    || "Four numbered editions, each composed around a single rare natural. From the first sketch to the finished flacon, every fragrance is built slowly in the atelier — top, heart and base notes balanced until the trail is right.";
 
 
   const imageSides = ["left", "right", "left", "right"];
@@ -93,55 +94,55 @@ export default function AboutPage() {
 
   const productShowcaseData = [
     {
-      label: layoutBlocksProductSection[0]?.richText?.root?.children?.find(child => child.tag === "h4")?.children[0]?.text || "Default Label",
-      title: layoutBlocksProductSection[0]?.richText?.root?.children?.find(child => child.tag === "h2")?.children[0]?.text || "Default Title",
-      description: layoutBlocksProductSection[0]?.richText?.root?.children?.find(child => child.type === "paragraph")?.children[0]?.text || "Default Description",
-      modalPath: '/images/Pink_Rose_Facial_Cream.glb',
-      modalScale: layoutBlocksProductSection[0]?.modalScale || 2.8,
+      label: layoutBlocksProductSection[0]?.richText?.root?.children?.find(child => child.tag === "h4")?.children[0]?.text || "Nº 01 · Eau de Parfum",
+      title: layoutBlocksProductSection[0]?.richText?.root?.children?.find(child => child.tag === "h2")?.children[0]?.text || "Bois d'Ambre",
+      description: layoutBlocksProductSection[0]?.richText?.root?.children?.find(child => child.type === "paragraph")?.children[0]?.text || "Smoked cedar and labdanum over a warm amber base. Top notes of pink pepper and bergamot; a heart of iris and ambrette.",
+      modalPath: 'amber',
+      modalScale: layoutBlocksProductSection[0]?.modalScale || 1.9,
       modalPosition: layoutBlocksProductSection[0]?.modalPosition || [0, 0, 0],
       imageSide: imageSides[0]
     },
     {
-      label: layoutBlocksProductSection[1]?.richText?.root?.children?.find(child => child.tag === "h4")?.children[0]?.text || "Default Label",
-      title: layoutBlocksProductSection[1]?.richText?.root?.children?.find(child => child.tag === "h2")?.children[0]?.text || "Default Title",
-      description: layoutBlocksProductSection[1]?.richText?.root?.children?.find(child => child.type === "paragraph")?.children[0]?.text || "Default Description",
-      modalPath: '/images/Pink_Conditioner.glb',
-      modalScale: layoutBlocksProductSection[1]?.modalScale || 2.4,
+      label: layoutBlocksProductSection[1]?.richText?.root?.children?.find(child => child.tag === "h4")?.children[0]?.text || "Nº 02 · Eau de Parfum",
+      title: layoutBlocksProductSection[1]?.richText?.root?.children?.find(child => child.tag === "h2")?.children[0]?.text || "Fleur Noire",
+      description: layoutBlocksProductSection[1]?.richText?.root?.children?.find(child => child.type === "paragraph")?.children[0]?.text || "Night-blooming tuberose and black orchid, grounded in oud and vetiver. A floral composed for the evening.",
+      modalPath: 'noir',
+      modalScale: layoutBlocksProductSection[1]?.modalScale || 1.9,
       // modalPosition: layoutBlocksProductSection[1]?.modalPosition || [0, 1, 0],
       imageSide: imageSides[1]
     },
     {
-      label: layoutBlocksProductSection[2]?.richText?.root?.children?.find(child => child.tag === "h4")?.children[0]?.text || "Default Label",
-      title: layoutBlocksProductSection[2]?.richText?.root?.children?.find(child => child.tag === "h2")?.children[0]?.text || "Default Title",
-      description: layoutBlocksProductSection[2]?.richText?.root?.children?.find(child => child.type === "paragraph")?.children[0]?.text || "Default Description",
-      modalPath: '/images/ras.glb',
-      modalScale: layoutBlocksProductSection[2]?.modalScale || 2.4,
+      label: layoutBlocksProductSection[2]?.richText?.root?.children?.find(child => child.tag === "h4")?.children[0]?.text || "Nº 03 · Eau de Parfum",
+      title: layoutBlocksProductSection[2]?.richText?.root?.children?.find(child => child.tag === "h2")?.children[0]?.text || "Sel Blanc",
+      description: layoutBlocksProductSection[2]?.richText?.root?.children?.find(child => child.type === "paragraph")?.children[0]?.text || "Sea salt, fig leaf and white musk. A luminous citrus opening that dries down to warm, sun-bleached driftwood.",
+      modalPath: 'clair',
+      modalScale: layoutBlocksProductSection[2]?.modalScale || 1.9,
       // modalPosition: layoutBlocksProductSection[2]?.modalPosition || [0, 1, 0],
       imageSide: imageSides[2]
     },
     {
-      label: layoutBlocksProductSection[3]?.richText?.root?.children?.find(child => child.tag === "h4")?.children[0]?.text || "Default Label",
-      title: layoutBlocksProductSection[3]?.richText?.root?.children?.find(child => child.tag === "h2")?.children[0]?.text || "Default Title",
-      description: layoutBlocksProductSection[3]?.richText?.root?.children?.find(child => child.type === "paragraph")?.children[0]?.text || "Default Description",
-      modalPath: '/images/VerticalWhiteTube.glb',
-      modalScale: layoutBlocksProductSection[3]?.modalScale || 4.2,
+      label: layoutBlocksProductSection[3]?.richText?.root?.children?.find(child => child.tag === "h4")?.children[0]?.text || "Nº 04 · Eau de Parfum",
+      title: layoutBlocksProductSection[3]?.richText?.root?.children?.find(child => child.tag === "h2")?.children[0]?.text || "Encens Vert",
+      description: layoutBlocksProductSection[3]?.richText?.root?.children?.find(child => child.type === "paragraph")?.children[0]?.text || "Frankincense and green galbanum with a heart of violet leaf. Resinous, cool and quietly ceremonial.",
+      modalPath: 'vert',
+      modalScale: layoutBlocksProductSection[3]?.modalScale || 1.9,
       modalPosition: layoutBlocksProductSection[3]?.modalPosition || [0, 0, 0],
       imageSide: imageSides[3],
-      rotation: [0, 0, 0]
+      rotation: [0, -Math.PI / 8, 0]
     }
   ];
   const layoutBlocksNumbersHeading = pageData?.layout?.[4]?.columns || [];
   const layoutBlockByNumberHeading = layoutBlocksNumbersHeading[0]?.richText?.root?.children?.find(child => child.tag === "h2")?.children[0]?.text || "By the Numbers";
-  const layoutBlockByNumberParagraph = layoutBlocksNumbersHeading[0]?.richText?.root?.children?.find(child => child.type === "paragraph")?.children[0]?.text || "Our track record speaks volumes. These numbers represent our commitment to excellence and innovation in cosmetic chemistry.";
+  const layoutBlockByNumberParagraph = layoutBlocksNumbersHeading[0]?.richText?.root?.children?.find(child => child.type === "paragraph")?.children[0]?.text || "A small house, measured slowly. These numbers describe how we work: few editions, rare materials, and the time each composition deserves.";
 
 
   const layoutBlocksNumbersSection = pageData?.layout?.[5]?.columns || [];
 
   // ✅ Defaults (used only when a stat field is missing)
   const DEFAULT_STATS = [
-    { value: "0", title: "Default Title", description: "Default description." },
-    { value: "0", title: "Default Title", description: "Default description." },
-    { value: "0", title: "Default Title", description: "Default description." },
+    { value: "12", title: "Numbered Editions", description: "Composed since the house was founded." },
+    { value: "40+", title: "Rare Naturals", description: "Sourced from a small circle of growers and distillers." },
+    { value: "100%", title: "Hand Finished", description: "Every flacon numbered and sealed in the atelier." },
   ];
 
   const stats = (layoutBlocksNumbersSection.length ? layoutBlocksNumbersSection : DEFAULT_STATS).map(
@@ -179,10 +180,11 @@ export default function AboutPage() {
   }
 
   return (
-    <div ref={containerRef} className="w-full bg-black overflow-x-hidden h-screen overflow-scroll no-scrollbar pt-20 min-h-screen">
-      <div className="text-white text-center my-8 md:my-16 px-4">
-        <h1 className="text-4xl md:text-6xl lg:text-[84px] font-[600] leading-tight mb-2 md:mb-4">{heroTitle}</h1>
-        <p className="text-[#FFFFFFCC] text-base md:text-lg font-[400] mx-auto">{heroDescription}</p>
+    <div ref={containerRef} className="w-full bg-ink overflow-x-hidden h-screen overflow-scroll no-scrollbar pt-20 min-h-screen">
+      <div className="text-ivory text-center my-8 md:my-16 px-4">
+        <p className="eyebrow mb-6">{brand.name}</p>
+        <h1 className="font-display text-4xl md:text-6xl lg:text-[84px] font-normal leading-tight mb-4 md:mb-6">{heroTitle}</h1>
+        <p className="text-taupe font-light text-base md:text-lg max-w-2xl mx-auto">{heroDescription}</p>
       </div>
       {sections.map((section, index) => (
         <AnimatedSection
@@ -206,10 +208,10 @@ export default function AboutPage() {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className='text-4xl md:text-5xl lg:text-[56px] font-bold text-white mb-4 md:mb-6 leading-tight'>
+        <h2 className='font-display text-4xl md:text-5xl lg:text-[56px] font-normal text-ivory mb-4 md:mb-6 leading-tight'>
           {excellenceHeading}
         </h2>
-        <p className='text-gray-300 text-base md:text-lg max-w-4xl mx-auto leading-relaxed'>
+        <p className='text-taupe font-light text-base md:text-lg max-w-3xl mx-auto leading-relaxed'>
           {excellenceParagraph}
         </p>
       </motion.div>

@@ -9,29 +9,29 @@ import Image from 'next/image';
 
 export function TwoColumnSection({
   leftColumnData = {
-    title: "Brands",
-    description: "Using our comprehensive Cosmetic Chemistry Directory, you can browse the best chemists at no cost.",
+    title: "For Boutiques",
+    description: "Stock the numbered collection in your boutique, with dedicated support from the atelier at every step.",
     points: [
-      "Access to elite cosmetic chemists",
-      "Free directory browsing",
-      "Tailored matching based on your needs"
+      "Curated wholesale editions",
+      "Bespoke in-store scenting",
+      "Dedicated atelier support"
     ],
     cta: {
       url: "/ExploreDirectory",
-      label: "Explore Directory"
+      label: "Explore the Collection"
     }
   },
   rightColumnData = {
-    title: "Cosmetic Chemists",
-    description: "Gain access to a network of innovative companies looking to collaborate with you.",
+    title: "For Perfumers",
+    description: "Collaborate with a house that values restraint, rare materials and the time it takes to get a composition right.",
     points: [
-      "Connect with leading brands",
-      "Showcase your expertise",
-      "Access exclusive resource libraries"
+      "Collaborate on numbered editions",
+      "Access rare natural materials",
+      "Join a house that values restraint"
     ],
     cta: {
       url: "/JoinOurNetwork",
-      label: "Join Our Network"
+      label: "Join the Atelier"
     }
   }
 }) {
@@ -76,44 +76,44 @@ export function TwoColumnSection({
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center bg-black text-white overflow-hidden snap-start"
+      className="relative min-h-screen flex items-center bg-ink text-ivory overflow-hidden snap-start"
     >
       <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-b from-transparent to-transparent pointer-events-none" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto w-full py-16">
         {/* Left Column */}
         <div ref={leftColRef} className="text-center space-y-6 mx-8 md:mx-1">
-          <h2 className="text-5xl font-extrabold">{leftColumnData.title}</h2>
-          <p className="text-gray-300 max-w-md mx-auto leading-relaxed">
+          <h2 className="font-display text-4xl md:text-5xl font-normal">{leftColumnData.title}</h2>
+          <p className="text-taupe font-light max-w-md mx-auto leading-relaxed">
             {leftColumnData.description}
           </p>
-          <div className="space-y-3 text-gray-200">
+          <div className="space-y-3 text-ivory/80 font-light">
             {leftColumnData.points.map((point, index) => (
               <p key={index}>{point}</p>
             ))}
           </div>
           <a href={'/coming-soon'}>
-            <button className="flex items-center mx-auto gap-2 px-6 py-3 bg-pink-500 text-white font-medium rounded-full shadow-lg">
-              {leftColumnData.cta.label} <ArrowUpRight size={18} />
+            <button className="btn-primary mx-auto">
+              {leftColumnData.cta.label} <ArrowUpRight size={16} strokeWidth={1.5} />
             </button>
           </a>
         </div>
         <div ref={leftColRef} className="text-center space-y-6 flex justify-center align-center">
-          <Image src='/images/serum_facail.png' alt='cosmetic' width={100} height={100} className="w-1/2 h-2/2 object-contain"/>
+          <Image src='/images/bottle-clair-dark.png' alt='Maison Sillage flacon' width={400} height={500} className="w-2/3 md:w-4/5 h-auto object-contain"/>
         </div>
         {/* Right Column */}
         <div ref={rightColRef} className="text-center space-y-6 mx-8 md:mx-1">
-          <h2 className="text-5xl font-extrabold">{rightColumnData.title}</h2>
-          <p className="text-gray-300 max-w-md mx-auto leading-relaxed">
+          <h2 className="font-display text-4xl md:text-5xl font-normal">{rightColumnData.title}</h2>
+          <p className="text-taupe font-light max-w-md mx-auto leading-relaxed">
             {rightColumnData.description}
           </p>
-          <div className="space-y-3 text-gray-200">
+          <div className="space-y-3 text-ivory/80 font-light">
             {rightColumnData.points.map((point, index) => (
               <p key={index}>{point}</p>
             ))}
           </div>
           <a href={'/join'}>
-            <button className="flex items-center mx-auto gap-2 px-6 py-3 bg-pink-500 text-white font-medium rounded-full shadow-lg">
-              {rightColumnData.cta.label} <ArrowUpRight size={18} />
+            <button className="btn-primary mx-auto">
+              {rightColumnData.cta.label} <ArrowUpRight size={16} strokeWidth={1.5} />
             </button>
           </a>
         </div>

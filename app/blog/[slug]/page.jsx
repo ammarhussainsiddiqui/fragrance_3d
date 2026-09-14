@@ -65,7 +65,7 @@ const normalizePost = (post) => {
 
   return {
     title: post.title,
-    imageUrl: imageUrl ? withBase(imageUrl).replace('/api', '') : '/images/product1.png',
+    imageUrl: imageUrl ? withBase(imageUrl).replace('/api', '') : '/images/bottle-amber-dark.png',
     publishedAt: post.publishedAt || post.createdAt,
     sections: extractSectionsFromLexical(post.content?.root),
   };
@@ -108,8 +108,8 @@ export default function BlogPostPage() {
 
   if (loading) {
     return (
-      <div className="bg-black min-h-screen flex items-center justify-center">
-        <Loader text={'Loading Story...'} />
+      <div className="bg-ink min-h-screen flex items-center justify-center">
+        <Loader text={'Loading Story'} />
       </div>
     );
   }
@@ -119,7 +119,7 @@ export default function BlogPostPage() {
   const { title, sections, imageUrl, publishedAt } = post;
 
   return (
-    <div className="w-full bg-black overflow-x-hidden h-screen overflow-scroll no-scrollbar text-white font-sans">
+    <div className="w-full bg-ink overflow-x-hidden h-screen overflow-scroll no-scrollbar text-ivory font-sans">
       {/* Hero Section */}
       <div className="relative w-full h-[80vh] flex items-end">
         <div className="absolute inset-0">
@@ -130,16 +130,16 @@ export default function BlogPostPage() {
             className="object-cover opacity-60"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
         </div>
 
         <div className="relative  container mx-auto px-6 pb-12 md:pb-20 max-w-5xl">
-          <div className="flex  items-center space-x-3 mb-4 text-amber-100 font-medium tracking-widest uppercase text-xs">
-            <span>Article</span>
-            <span className="w-1 h-1 bg-gray-500 rounded-full"></span>
+          <div className="flex  items-center space-x-3 mb-5 text-champagne font-sans tracking-[0.25em] uppercase text-[11px]">
+            <span>Journal</span>
+            <span className="w-1 h-1 bg-taupe rounded-full"></span>
             <span>{formatDate(publishedAt)}</span>
           </div>
-          <h1 className="text-4xl md:text-6xl  font-bold leading-[1.1] tracking-tight mb-4">
+          <h1 className="font-display text-4xl md:text-6xl font-normal leading-[1.1] tracking-tight mb-4">
             {title}
           </h1>
         </div>
@@ -151,29 +151,29 @@ export default function BlogPostPage() {
 
           {/* Left Sidebar: Share (Desktop) */}
           <aside className="hidden lg:block w-16">
-            <div className="sticky top-24 flex flex-col space-y-6 items-center border-r border-white/10 pr-6">
+            <div className="sticky top-24 flex flex-col space-y-6 items-center border-r border-ivory/10 pr-6">
               <a
                 href="https://www.facebook.com/cosmeticchemistlabs"
                 target="_blank"
-                className="text-white hover:text-pink-500"
+                className="text-ivory hover:text-champagne"
               >
-                <button className="text-gray-400 hover:text-white transition-colors"><FaFacebookF size={20} /></button>
+                <button className="text-taupe hover:text-champagne transition-colors"><FaFacebookF size={18} /></button>
               </a>
               <a
                 href="https://x.com/COSMETICLABSx"
                 target="_blank"
-                className="text-white hover:text-pink-500"
+                className="text-ivory hover:text-champagne"
               >
-                <button className="text-gray-400 hover:text-white transition-colors"><FaXTwitter size={20} /></button>
+                <button className="text-taupe hover:text-champagne transition-colors"><FaXTwitter size={18} /></button>
               </a>
               <a
                 href="https://www.linkedin.com/company/cosmetic-chemist-labs/"
                 target="_blank"
-                className="text-white hover:text-pink-500"
+                className="text-ivory hover:text-champagne"
               >
-                <button className="text-gray-400 hover:text-white transition-colors"><FaLinkedinIn size={20} /></button>
+                <button className="text-taupe hover:text-champagne transition-colors"><FaLinkedinIn size={18} /></button>
               </a>
-              <button className="text-gray-400 hover:text-white transition-colors"><FaRegBookmark size={20} /></button>
+              <button className="text-taupe hover:text-champagne transition-colors"><FaRegBookmark size={18} /></button>
             </div>
           </aside>
 
@@ -184,12 +184,12 @@ export default function BlogPostPage() {
               {sections.map((sec, i) => (
                 <section key={i} className="mb-10 group">
                   {sec.heading && (
-                    <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-white/90 group-first:mt-0 mt-12">
+                    <h2 className="font-display text-2xl md:text-3xl font-normal mb-6 text-ivory group-first:mt-0 mt-12">
                       {sec.heading}
                     </h2>
                   )}
                   {sec.paragraphs.map((p, j) => (
-                    <p key={j} className="text-lg md:text-xl leading-relaxed text-gray-300 mb-6 font-light">
+                    <p key={j} className="text-lg md:text-xl leading-relaxed text-taupe mb-6 font-light">
                       {p}
                     </p>
                   ))}
@@ -198,7 +198,7 @@ export default function BlogPostPage() {
 
               {/* Gradient overlay when collapsed */}
               {!isExpanded && (
-                <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black via-black/80 to-transparent" />
+                <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-ink via-ink/80 to-transparent" />
               )}
             </div>
 
@@ -206,30 +206,30 @@ export default function BlogPostPage() {
             <div className="flex justify-center mt-8">
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="flex items-center space-x-2 bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-pink-500 hover:text-white transition-all active:scale-95"
+                className="btn-primary active:scale-95"
               >
                 <span>{isExpanded ? "Show Less" : "Read Full Story"}</span>
-                {isExpanded ? <FaChevronUp size={14} /> : <FaChevronDown size={14} />}
+                {isExpanded ? <FaChevronUp size={12} /> : <FaChevronDown size={12} />}
               </button>
             </div>
 
             {/* Tags & Mobile Share */}
-            <div className="mt-20 pt-10 border-t border-white/10">
+            <div className="mt-20 pt-10 border-t border-ivory/10">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="flex flex-wrap gap-2">
-                  {['Beauty', 'Skincare', 'Wellness'].map(tag => (
-                    <span key={tag} className="px-4 py-1.5 text-xs font-medium bg-white/5 border border-white/10 rounded-full hover:bg-white/10 cursor-pointer transition-colors">
+                  {['Fragrance', 'Notes', 'Ritual'].map(tag => (
+                    <span key={tag} className="px-4 py-1.5 font-sans text-[11px] uppercase tracking-[0.2em] text-ivory/80 border border-ivory/15 rounded-full hover:border-champagne hover:text-champagne cursor-pointer transition-colors">
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex items-center space-x-6 lg:hidden border-t border-white/10 pt-6 md:border-none md:pt-0">
-                  <span className="text-sm text-gray-500 uppercase tracking-widest">Share</span>
+                <div className="flex items-center space-x-6 lg:hidden border-t border-ivory/10 pt-6 md:border-none md:pt-0">
+                  <span className="text-[11px] text-taupe uppercase tracking-[0.25em]">Share</span>
                   <div className="flex space-x-4">
-                    <FaFacebookF className="text-gray-400 hover:text-white" />
-                    <FaTwitter className="text-gray-400 hover:text-white" />
-                    <FaLinkedinIn className="text-gray-400 hover:text-white" />
+                    <FaFacebookF className="text-taupe hover:text-champagne" />
+                    <FaTwitter className="text-taupe hover:text-champagne" />
+                    <FaLinkedinIn className="text-taupe hover:text-champagne" />
                   </div>
                 </div>
               </div>

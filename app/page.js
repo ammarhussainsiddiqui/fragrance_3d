@@ -42,36 +42,38 @@ export default function Home() {
 
   // ✅ Default values (only used when API data is missing)
   const DEFAULTS = {
-    heroHeading: "Default Hero Heading",
-    heroDescription: "Default hero description goes here.",
+    heroHeading: "Eau de Parfum",
+    heroDescription: "Numbered eaux de parfum composed in small editions — rare naturals, quiet structure, and a trail that lingers long after you have left the room.",
     heroImage: { url: "/images/placeholder.jpg", alt: "Hero image" },
-    heroCTALabel: "Learn More",
+    heroCTALabel: "Discover the Collection",
     heroCTAUrl: "/",
 
-    whatWeDoTitle: "What We Do",
-    whatWeDoDescription: "Default description for what we do.",
+    whatWeDoTitle: "The House",
+    whatWeDoDescription: "Maison Sillage composes fragrance the way a couturier cuts cloth: with restraint, precision and an obsession with material. Each edition is built around a single rare natural and finished by hand.",
     whatWeDoFeatures: [
-      { title: "Default Feature 1", description: "Default feature description." },
-      { title: "Default Feature 2", description: "Default feature description." },
+      { title: "Rare Naturals", description: "Sourced from a small circle of growers and distillers" },
+      { title: "Composed by Hand", description: "Every edition finished and numbered in our atelier" },
+      { title: "Lasting Sillage", description: "Concentrated extraits with a trail that lingers" },
+      { title: "Considered Craft", description: "Refillable flacons in glass and metal, nothing else" },
     ],
 
     oneStopHeading: {
-      title: "One Stop",
-      highlightedTitle: "Solution",
-      subtitle: "Default subtitle here.",
+      title: "A single",
+      highlightedTitle: "signature",
+      subtitle: "for every occasion",
     },
-    oneStopDescription: "Default one stop description goes here.",
-    oneStopCTA: { url: "/get-started", label: "Get Started" },
+    oneStopDescription: "From a first eau de parfum to a bespoke composition made for one person alone, the atelier accompanies you at every step.\nWe advise on notes, concentration and ritual — and finish each flacon by hand.\nYou will not find a more considered fragrance house than Maison Sillage.",
+    oneStopCTA: { url: "/get-started", label: "Book a Consultation" },
 
     brands: {
-      title: "For Brands",
-      points: ["Default point 1", "Default point 2"],
-      cta: { url: "/ExploreDirectory", label: "Explore Directory" },
+      title: "For Boutiques",
+      points: ["Curated wholesale editions", "Bespoke in-store scenting", "Dedicated atelier support"],
+      cta: { url: "/ExploreDirectory", label: "Explore the Collection" },
     },
     chemists: {
-      title: "For Chemists",
-      points: ["Default point 1", "Default point 2"],
-      cta: { url: "/JoinOurNetwork", label: "Join Our Network" },
+      title: "For Perfumers",
+      points: ["Collaborate on numbered editions", "Access rare natural materials", "Join a house that values restraint"],
+      cta: { url: "/JoinOurNetwork", label: "Join the Atelier" },
     },
   };
 
@@ -226,7 +228,7 @@ export default function Home() {
 
   return (
     <ScrollerContext.Provider value={mainRef}>
-      <main ref={mainRef} className="w-full bg-black overflow-x-hidden h-screen overflow-scroll no-scrollbar">
+      <main ref={mainRef} className="w-full bg-ink overflow-x-hidden h-screen overflow-scroll no-scrollbar">
                {isMobile ? (
           // Mobile view
           <>
@@ -238,7 +240,7 @@ export default function Home() {
             <SectionTwo
               title={whatWeDoTitle}
               description={whatWeDoDescription}
-              features={whatWeDoFeatures}
+              features={finalWhatWeDoFeatures}
             />
           </>
         ) : (
@@ -249,7 +251,7 @@ export default function Home() {
             ctaLabel={heroCTA}
             title2={whatWeDoTitle}
             description2={whatWeDoDescription}
-            features={whatWeDoFeatures}
+            features={finalWhatWeDoFeatures}
           />
         )}
         <SectionThree

@@ -12,19 +12,20 @@ import { normalizePostsForBlogList } from '../../lib/actions';
 function BlogList({ currentPage, posts, hasNextPage, totalPages }) {
   if (!posts || posts.length === 0) {
     return (
-      <div className="text-center p-12">
-        <h2 className="text-2xl font-bold mb-4">No Posts Found</h2>
-        <p className="text-gray-600">
-          Could not connect to the blog API. Please ensure the API is running correctly.
+      <div className="text-center p-12 pt-40 text-ivory">
+        <h2 className="font-display text-3xl mb-4">No Stories Yet</h2>
+        <p className="text-taupe font-light">
+          Could not connect to the journal API. Please ensure the API is running correctly.
         </p>
       </div>
     );
   }
 
   return (
-    <div className="bg-black min-h-screen py-24 px-4">
+    <div className="bg-ink min-h-screen py-24 px-4">
       <div className="container mx-auto max-w-7xl">
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">Blogs</h1>
+        <p className="eyebrow text-center mb-5">The Journal</p>
+        <h1 className="font-display text-4xl md:text-5xl font-normal text-center mb-16 text-ivory">Stories</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((post) => {
@@ -32,7 +33,7 @@ function BlogList({ currentPage, posts, hasNextPage, totalPages }) {
               ? post.cover.formats.medium.url
               : post.cover?.url
                 ? post.cover.url
-                : '/fav.png';
+                : '/images/bottle-noir-dark.png';
 
             const postDate = new Date(post.publishedAt || post.createdAt).toLocaleDateString('en-US', {
               month: 'long',
@@ -47,30 +48,30 @@ function BlogList({ currentPage, posts, hasNextPage, totalPages }) {
 
             return (
               <Link href={`/blog/${post.id}`} key={post.id}>
-                <div className="bg-black border h-full border-gray-800 rounded-lg overflow-hidden hover:border-gray-600 transition-all duration-300 group">
-                  <div className="relative h-64 overflow-hidden">
+                <div className="bg-ink border h-full border-ivory/10 rounded-lg overflow-hidden hover:border-ivory/30 transition-all duration-300 group">
+                  <div className="relative h-64 overflow-hidden bg-ink-soft">
                     <img
                       src={coverImage}
                       alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
 
                   <div className="p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className='text-[12px] font-normal text-[#FFFFFF]'>{postDate}</span>
-                      <p className='text-[12px] font-normal text-[#FFFFFF]'>10 Min Read</p>
+                    <div className="flex items-center justify-between mb-3 font-sans text-[11px] uppercase tracking-[0.2em] text-taupe">
+                      <span>{postDate}</span>
+                      <p>10 Min Read</p>
                     </div>
 
-                    <h2 className="text-[#FFFFFF] text-[24px] font-[600] mb-1 line-clamp-2">
+                    <h2 className="font-display text-ivory text-[24px] font-normal mb-2 line-clamp-2">
                       {post.title}
                     </h2>
 
-                    <p className="text-[#FFFFFF] text-[14px] font-[400] mb-1 line-clamp-3 h-full">
+                    <p className="text-taupe font-light text-[14px] mb-4 line-clamp-3 h-full">
                       {description}
                     </p>
 
-                    <div className="text-white text-sm font-medium underline group-hover:text-gray-300 transition-colors">
+                    <div className="font-sans text-xs uppercase tracking-[0.2em] text-champagne group-hover:text-ivory transition-colors">
                       Read More
                     </div>
                   </div>
@@ -84,7 +85,7 @@ function BlogList({ currentPage, posts, hasNextPage, totalPages }) {
         {hasNextPage && (
           <div className="flex justify-center mt-12">
             <Link href={`/blog?page=${currentPage + 1}`}>
-              <button className="px-8 py-3 border border-white text-white rounded hover:bg-white hover:text-black transition-colors duration-300">
+              <button className="btn-ghost">
                 Load More
               </button>
             </Link>
@@ -132,9 +133,9 @@ export default function BlogPage({ searchParams }) {
   // ✅ Real loading UI (Suspense doesn't help with client fetching)
   if (loading) {
     return (
-      <div className="bg-black min-h-screen flex items-center justify-center">
-        <div className="text-white text-xl">
-          <Loader text={'Loading Blogs...'} />
+      <div className="bg-ink min-h-screen flex items-center justify-center">
+        <div className="text-ivory text-xl">
+          <Loader text={'Loading Stories'} />
         </div>
       </div>
     );

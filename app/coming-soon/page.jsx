@@ -43,10 +43,10 @@ export default function ComingSoon() {
 
     timerComponents.push(
       <div key={interval} className="flex flex-col items-center mx-2">
-        <span className="text-4xl md:text-6xl font-bold text-white">
+        <span className="font-display text-4xl md:text-6xl text-ivory">
           {timeLeft[interval] < 10 ? `0${timeLeft[interval]}` : timeLeft[interval]}
         </span>
-        <span className="text-sm md:text-lg text-gray-400 uppercase">
+        <span className="font-sans text-[11px] md:text-xs text-taupe uppercase tracking-[0.25em] mt-2">
           {interval}
         </span>
       </div>
@@ -54,15 +54,16 @@ export default function ComingSoon() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white p-4"> 
+    <div className="min-h-screen flex flex-col items-center justify-center bg-ink text-ivory p-4">
 
       <main className="text-center max-w-4xl mx-auto mt-22">
-        <h1 className="text-4xl md:text-6xl font-bold pb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600">
+        <p className="eyebrow mb-6">The Collection</p>
+        <h1 className="font-display text-4xl md:text-6xl font-normal pb-8 text-ivory italic">
           Coming Soon
         </h1>
-        
-        <p className="text-xl md:text-2xl mb-12 text-gray-300">
-          We're working hard to bring you something amazing. Stay tuned!
+
+        <p className="text-xl md:text-2xl mb-12 text-taupe font-light">
+          A new edition is resting in the atelier. It will be numbered soon.
         </p>
 
         <div className="flex justify-center my-12">
@@ -71,12 +72,12 @@ export default function ComingSoon() {
               {timerComponents}
             </div>
           ) : (
-            <p className="text-xl">We're live! 🎉</p>
+            <p className="font-display italic text-xl text-champagne">Now available</p>
           )}
         </div>
 
         <div className="mt-8">
-          <p className="text-lg mb-6 text-gray-400">Be the first to know when we launch</p>
+          <p className="text-base mb-6 text-taupe font-light">Be the first to know when it leaves the atelier.</p>
         </div>
       </main>
 

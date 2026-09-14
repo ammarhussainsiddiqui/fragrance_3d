@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Logo from './Logo';
 import BlogSearchPopup from './BlogSearchPopup';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
@@ -12,7 +12,7 @@ const Header = () => {
   const DEFAULT_NAV_LINKS = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
-    { href: "/service", label: "Services" },
+    { href: "/services", label: "Services" },
     { href: "/blog", label: "Blog" },
     { href: "/faq", label: "FAQ's" },
     // { href: "/contact", label: "Contact" }
@@ -84,34 +84,28 @@ const Header = () => {
   // ...rest of your component render
 
   return (
-    <header 
+    <header
      style={{zIndex:'1000'}}
-     className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/90 py-3' : 'bg-black/40 py-4 md:py-6'}`}>
+     className={`fixed top-0 w-full z-50 transition-all duration-300 backdrop-blur-md ${isScrolled ? 'bg-ink/85 border-b border-ivory/10 py-3' : 'bg-ink/40 py-4 md:py-6'}`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link 
-          href="/" 
+        <Link
+          href="/"
           className="flex items-center gap-2 md:gap-3 hover:opacity-80 transition z-50"
           onClick={(e) => {
             e.preventDefault();
             handleNavigation("/");
           }}
         >
-          <Image
-            width={isScrolled ? 100 : 130}
-            height={isScrolled ? 100 : 130}
-            src="/new-full-logo.png"
-            alt="Cosmetic Chemist Logo"
-            className="transition-all duration-300"
-          />
+          <Logo className={`transition-transform duration-300 origin-left ${isScrolled ? 'scale-90' : 'scale-100'}`} />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex gap-6 lg:gap-8 text-white/80 text-sm ">
+        <nav className="hidden md:flex gap-6 lg:gap-9 text-ivory/70 font-sans text-[12px] uppercase tracking-[0.2em]">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="hover:text-white transition-colors duration-200"
+              className="hover:text-champagne transition-colors duration-300"
               onClick={(e) => {
                 e.preventDefault();
                 handleNavigation(link.href);
@@ -129,11 +123,11 @@ const Header = () => {
                 onClick={() => {
                   router.push(ctaLink?.href);
                 }}
-                className="group cursor-pointer flex items-center gap-2 sm:gap-3 px-5 py-2.5 sm:px-6 sm:py-3  bg-gradient-to-r from-[#FF4F7A] to-pink-600 text-white rounded-full font-semibold text-sm sm:text-base hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300 w-full sm:w-auto justify-center"
+                className="btn-primary group px-6 py-3"
               >
                 <span>{ctaLink?.label}</span>
                 <motion.svg
-                  className="w-4 h-4 sm:w-5 sm:h-5"
+                  className="w-4 h-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -143,7 +137,7 @@ const Header = () => {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth={2}
+                    strokeWidth={1.5}
                     d="M13 7l5 5m0 0l-5 5m5-5H6"
                   />
                 </motion.svg>
@@ -153,16 +147,16 @@ const Header = () => {
           {/* Mobile menu button */}
           <button
             onClick={toggleMenu}
-            className={`md:hidden text-white/80 hover:text-white focus:outline-none ${isMenuOpen ? 'z-50' : ''}`}
+            className={`md:hidden text-ivory/80 hover:text-ivory focus:outline-none ${isMenuOpen ? 'z-50' : ''}`}
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16m-7 6h7" />
               </svg>
             )}
           </button>
@@ -171,15 +165,15 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       <div
-        className={`fixed inset-0 bg-black/40 backdrop-blur-md z-40 transform transition-all duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed inset-0 bg-ink/90 backdrop-blur-md z-40 transform transition-all duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           } md:hidden pt-24`}
       >
-        <nav className="flex flex-col space-y-4 text-xl text-center mt-16">
+        <nav className="flex flex-col space-y-6 text-center mt-16 font-display text-3xl">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-white/80 hover:text-white transition-colors duration-200"
+              className="text-ivory/80 hover:text-champagne transition-colors duration-300"
               onClick={() => {
                 handleNavigation(link.href);
                 setIsMenuOpen(false);
@@ -192,16 +186,16 @@ const Header = () => {
           {/* <div className="pt-4">
             <BlogSearchPopup />
           </div> */}
-          <div className="mx-4">
+          <div className="mx-8 pt-6">
             <button
               onClick={() => {
                 router.push('/contact');
               }}
-              className="group cursor-pointer flex items-center gap-2 sm:gap-3 px-5 py-2.5 sm:px-6 sm:py-3  bg-gradient-to-r from-[#FF4F7A] to-pink-600 text-white rounded-full font-semibold text-sm sm:text-base hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300 w-full sm:w-auto justify-center"
+              className="btn-primary w-full"
             >
               <span>Contact</span>
               <motion.svg
-                className="w-4 h-4 sm:w-5 sm:h-5"
+                className="w-4 h-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -211,7 +205,7 @@ const Header = () => {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={2}
+                  strokeWidth={1.5}
                   d="M13 7l5 5m0 0l-5 5m5-5H6"
                 />
               </motion.svg>

@@ -48,40 +48,40 @@ const AnimatedNumber = ({ value }) => {
 
 const stats = [
   {
-    value: '30+',
-    title: 'Years Combined Experience',
-    description: 'Decades of industry expertise'
+    value: '12',
+    title: 'Numbered Editions',
+    description: 'Composed since the house was founded'
   },
   {
-    value: '500+',
-    title: 'Products Formulated',
-    description: 'Innovative formulations created'
-  },
-  {
-    value: '100+',
-    title: 'Expert Chemists',
-    description: 'In our curated network'
-  },
-  {
-    value: '50+',
-    title: 'Partner Brands',
-    description: 'From indie to global leaders'
-  },
-  {
-    value: '250K',
-    title: 'Document Library',
-    description: 'Comprehensive resources'
+    value: '40+',
+    title: 'Rare Naturals',
+    description: 'Sourced from a small circle of growers'
   },
   {
     value: '100%',
-    title: 'Regulatory Compliance',
-    description: 'Global standards met'
+    title: 'Hand Finished',
+    description: 'Every flacon numbered in the atelier'
+  },
+  {
+    value: '60+',
+    title: 'Boutiques',
+    description: 'Stocking the collection worldwide'
+  },
+  {
+    value: '18',
+    title: 'Months',
+    description: 'Average time to compose an edition'
+  },
+  {
+    value: '100%',
+    title: 'Refillable',
+    description: 'Glass and metal, nothing else'
   }
 ];
 
 export default function ByTheNumbers({ stats, heading, paragraph }) {
   return (
-    <section className="relative w-full py-16 md:py-24 bg-black overflow-hidden">
+    <section className="relative w-full py-16 md:py-24 bg-ink overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div
           className="text-center mb-16"
@@ -90,8 +90,8 @@ export default function ByTheNumbers({ stats, heading, paragraph }) {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">{heading}</h2>
-          <p className="text-gray-300 text-lg max-w-3xl mx-auto">
+          <h2 className="font-display text-4xl md:text-5xl font-normal text-ivory mb-5">{heading}</h2>
+          <p className="text-taupe font-light text-lg max-w-3xl mx-auto">
             {paragraph}
           </p>
         </motion.div>
@@ -100,19 +100,19 @@ export default function ByTheNumbers({ stats, heading, paragraph }) {
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              className="bg-[linear-gradient(135deg,rgba(255,255,255,0.05)_0%,rgba(0,0,0,0)_100%)] p-6 md:p-8 rounded-xl border border-[#FFFFFF0D] shadow-lg"
+              className="bg-ink-soft/60 p-6 md:p-8 rounded-xl border border-ivory/10"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="text-4xl md:text-5xl font-bold text-pink-500 mb-2 text-center">
+              <div className="font-display text-4xl md:text-5xl text-champagne mb-3 text-center">
                 <AnimatedNumber value={stat.value} />
               </div>
-              <h3 className="text-xl md:text-2xl font-semibold text-white mb-2 text-center">
+              <h3 className="font-sans text-sm uppercase tracking-[0.18em] text-ivory mb-2 text-center">
                 {stat.title}
               </h3>
-              <p className="text-gray-400 text-sm md:text-base text-center">
+              <p className="text-taupe font-light text-sm md:text-base text-center">
                 {stat.description}
               </p>
             </motion.div>

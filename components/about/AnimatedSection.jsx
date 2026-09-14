@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { motion, useInView } from "framer-motion"
-import Image from "next/image"
+import { Flower2, Wind, Droplets, Gem } from "lucide-react"
 
 
 export default function AnimatedSection({ section, index, swapLayout = false }) {
@@ -14,7 +14,9 @@ export default function AnimatedSection({ section, index, swapLayout = false }) 
         amount: 0.3
     })
 
-    const colors = ['#FF4D8A', '#A855F7', '#3B82F6', '#CBFF00']
+    const accent = '#cdb98e'
+    const icons = [Flower2, Wind, Droplets, Gem]
+    const Icon = icons[index % icons.length]
 
     useEffect(() => {
         if (index === 0 && !hasAnimated) {
@@ -30,30 +32,25 @@ export default function AnimatedSection({ section, index, swapLayout = false }) 
     return (
         <div
             ref={ref}
-            className="relative w-full  flex items-center justify-center overflow-hidden bg-black"
+            className="relative w-full  flex items-center justify-center overflow-hidden bg-ink"
         >
             {/* Background grid effect */}
             <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.1)_1px,transparent_1px)] bg-[size:50px_50px]" />
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(244,239,230,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(244,239,230,.08)_1px,transparent_1px)] bg-[size:50px_50px]" />
             </div>
 
-            {/* Vertical timeline divider */}            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent bg-gray-600" />
+            {/* Vertical timeline divider */}            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-ivory/10" />
 
 
             {/* Timeline dots */}
             <motion.div
-                className="absolute left-1/2 top-1/2 w-6 h-6 rounded-full transform -translate-x-1/2 -translate-y-1/2"
+                className="absolute left-1/2 top-1/2 w-3 h-3 rounded-full transform -translate-x-1/2 -translate-y-1/2"
                 initial={{ scale: 0 }}
                 animate={shouldAnimate ? { scale: 1 } : { scale: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
                 style={{
-                    backgroundColor: colors[index],
-                    border: '2px solid black',
-                    boxShadow: `
-      0 0 10px ${colors[index]},
-      0 0 20px ${colors[index]}40,
-      0 0 30px ${colors[index]}20
-    `
+                    backgroundColor: accent,
+                    boxShadow: `0 0 0 6px rgba(205,185,142,0.12)`
                 }}
             />
 
@@ -66,26 +63,19 @@ export default function AnimatedSection({ section, index, swapLayout = false }) 
                         initial={{ opacity: 0, x: swapLayout ? 100 : -100 }}
                         animate={shouldAnimate ? { opacity: 1, x: 0 } : { opacity: 0, x: swapLayout ? 100 : -100 }}
                         transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-                        className="order-2 md:order-1 text-white md:[direction:ltr] bg-black/30 backdrop-blur-sm border border-gray-600/30 rounded-xl p-8 max-w-lg mx-auto"
+                        className="order-2 md:order-1 text-ivory md:[direction:ltr] bg-ink-soft/60 backdrop-blur-sm border border-ivory/10 rounded-xl p-8 max-w-lg mx-auto"
                     >
                         <motion.div
-                            className="relative w-28 h-28 mb-4 overflow-hidden rounded-lg"
+                            className="relative w-14 h-14 mb-6 flex items-center justify-center rounded-full border border-champagne/40 text-champagne"
                             initial={{ scale: 0, rotate: -20 }}
                             animate={shouldAnimate ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -20 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                        >  
-                                <Image
-                                    src={`/images/about-${index + 1}.png`}
-                                    alt={section.title || 'Section image'}
-                                    fill
-                                    className="object-cover"
-                                    priority
-                                    style={{ marginLeft: "-24px", zIndex: 1 }}
-                                />                          
+                        >
+                            <Icon className="w-6 h-6" strokeWidth={1.25} />
                         </motion.div>
 
                         <motion.h2
-                            className="text-3xl md:text-4xl font-bold mb-6 text-white leading-tight"
+                            className="font-display text-3xl md:text-4xl font-normal mb-5 text-ivory leading-tight"
                             initial={{ opacity: 0, y: 20 }}
                             animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                             transition={{ duration: 0.6, delay: 0.4 }}
@@ -94,18 +84,17 @@ export default function AnimatedSection({ section, index, swapLayout = false }) 
                         </motion.h2>
 
                         <motion.h3
-                            className="text-sm font-semibold tracking-widest mb-3 uppercase"
+                            className="eyebrow mb-4"
                             initial={{ opacity: 0, y: 20 }}
                             animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                             transition={{ duration: 0.6, delay: 0.3 }}
-                            style={{ color: colors[index] }}
                         >
                             {section.subtitle}
                         </motion.h3>
 
 
                         <motion.p
-                            className="text-gray-300 text-sm md:text-base leading-relaxed max-w-lg"
+                            className="text-taupe font-light text-sm md:text-base leading-relaxed max-w-lg"
                             initial={{ opacity: 0, y: 20 }}
                             animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                             transition={{ duration: 0.6, delay: 0.5 }}
@@ -115,7 +104,7 @@ export default function AnimatedSection({ section, index, swapLayout = false }) 
 
                         {/* Underline accent */}
                         <motion.div
-                            className="mt-8 h-1 w-16 bg-[#FF4D8A]"
+                            className="mt-8 h-px w-16 bg-champagne"
                             initial={{ width: 0 }}
                             animate={shouldAnimate ? { width: 64 } : { width: 0 }}
                             transition={{ duration: 0.8, delay: 0.6 }}
@@ -143,8 +132,8 @@ export default function AnimatedSection({ section, index, swapLayout = false }) 
                             />
 
                             {/* Number */}
-                            <div className="text-9xl md:text-[250px] font-bold text-transparent bg-clip-text
-                                           bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a] to-[#e5e5e5]">
+                            <div className="font-display italic text-9xl md:text-[250px] font-normal text-transparent bg-clip-text
+                                           bg-gradient-to-r from-ink-line via-ink-line to-taupe">
                                 {section.number}
                             </div>
                         </motion.div>

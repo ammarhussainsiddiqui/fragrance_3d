@@ -11,14 +11,14 @@ const initialState = {
 export function ContactSection() {
   // 1. Initialize the hook
   const [state, formAction, isPending] = useActionState(sendEmail, initialState);
-    
+
   const dropdownValue = [
-    { value: "skin-care", label: "Skin Care" },
-    { value: "hair-care", label: "Hair Care" },
-    { value: "oral-care", label: "Oral Care" },
-    { value: "personal-care", label: "Personal Care" },
-    { value: "product-reformulation", label: "Product Reformulation" },
-    { value: "reverse-engineer", label: "Reverse Engineer" },
+    { value: "signature-scent", label: "Bespoke Signature Scent" },
+    { value: "private-label", label: "Private Label Fragrance" },
+    { value: "wholesale", label: "Wholesale / Stockist" },
+    { value: "home-fragrance", label: "Home & Ambient Fragrance" },
+    { value: "discovery-set", label: "Discovery Set" },
+    { value: "reformulation", label: "Fragrance Reformulation" },
     { value: "consultation-only", label: "Consultation Only" },
     { value: "lets-discuss", label: "Let's Discuss" },
   ];
@@ -32,80 +32,80 @@ export function ContactSection() {
   ];
 
   return (
-    <section className="w-full bg-black text-white snap-start flex flex-col justify-center py-12 md:py-20 px-4 sm:px-6 mb-6">
-      <div className="max-w-6xl mx-auto text-center mb-6 md:mb-4 mt-6 md:mt-10 px-4">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight">
-          Let&apos;s Create Something Amazing Together
+    <section className="w-full bg-ink text-ivory snap-start flex flex-col justify-center py-12 md:py-20 px-4 sm:px-6 mb-6">
+      <div className="max-w-6xl mx-auto text-center mb-10 md:mb-8 mt-6 md:mt-10 px-4">
+        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal leading-tight">
+          Let&apos;s Compose Something Together
         </h2>
-        <p className="text-gray-300 text-lg max-w-3xl mx-auto mt-3">Ready to transform your beauty vision into reality? Get in touch with our expert team for a free consultation.</p>
+        <p className="text-taupe font-light text-lg max-w-2xl mx-auto mt-4">Commission a signature scent, stock the collection, or simply begin with a conversation. Write to the atelier.</p>
       </div>
 
-      <div className="max-w-6xl w-full mx-auto bg-[#111]/60 backdrop-blur-2xl border border-white/10 p-6 sm:p-8 md:p-10 rounded-2xl shadow-[0_0_40px_rgba(255,20,147,0.15)]">
-        <h3 className="text-lg sm:text-xl font-semibold mb-1">Start Your Project - We Will Contact You Very Soon</h3>
-        <p className="text-gray-300 text-[13px] mb-1">Start Your Project - We Will Contact You Very Soon</p>
+      <div className="max-w-6xl w-full mx-auto bg-ink-soft border border-ivory/10 p-6 sm:p-8 md:p-12 rounded-2xl">
+        <h3 className="font-sans text-xs uppercase tracking-[0.25em] text-champagne mb-2">Begin a Conversation</h3>
+        <p className="text-taupe font-light text-sm mb-8">Tell us a little about yourself and what you are looking for. The atelier replies within two working days.</p>
 
         {/* 2. Add formAction here */}
-        <form action={formAction} className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+        <form action={formAction} className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
 
           <div>
-            <label className="text-xs sm:text-sm mb-1 sm:mb-2 block">Full Name *</label>
+            <label className="text-[11px] uppercase tracking-[0.2em] text-taupe mb-1 block">Full Name *</label>
             <input
               name="fullName" // Added name
               required
-              className="w-full text-sm sm:text-base bg-[#FFFFFF0D] border border-white/10 rounded-full px-4 py-2 sm:py-2.5 outline-none focus:border-pink-500 transition"
+              className="field"
               placeholder="Your name"
             />
           </div>
 
           <div>
-            <label className="text-xs sm:text-sm mb-1 sm:mb-2 block">Email Address *</label>
+            <label className="text-[11px] uppercase tracking-[0.2em] text-taupe mb-1 block">Email Address *</label>
             <input
               name="email" // Added name
               type="email"
               required
-              className="w-full text-sm sm:text-base bg-[#FFFFFF0D] border border-white/10 rounded-full px-4 py-2 sm:py-2.5 outline-none focus:border-pink-500 transition"
+              className="field"
               placeholder="your.email@example.com"
             />
           </div>
 
           <div>
-            <label className="text-xs sm:text-sm mb-1 sm:mb-2 block">Company Name</label>
+            <label className="text-[11px] uppercase tracking-[0.2em] text-taupe mb-1 block">Company Name</label>
             <input
               name="companyName" // Added name
-              className="w-full text-sm sm:text-base bg-[#FFFFFF0D] border border-white/10 rounded-full px-4 py-2 sm:py-2.5 outline-none focus:border-pink-500 transition"
+              className="field"
               placeholder="Your company (optional)"
             />
           </div>
 
           <div>
-            <label className="text-xs sm:text-sm mb-1 sm:mb-2 block">Phone Number</label>
+            <label className="text-[11px] uppercase tracking-[0.2em] text-taupe mb-1 block">Phone Number</label>
             <input
               name="phoneNumber" // Added name
               type="tel"
-              className="w-full text-sm sm:text-base bg-[#FFFFFF0D] border border-white/10 rounded-full px-4 py-2 sm:py-2.5 outline-none focus:border-pink-500 transition"
+              className="field"
               placeholder="+1 (___) ___-____"
             />
           </div>
 
           <div>
-            <label className="text-xs sm:text-sm mb-1 sm:mb-2 block">Project Type *</label>
+            <label className="text-[11px] uppercase tracking-[0.2em] text-taupe mb-1 block">Project Type *</label>
             {/* Added name prop - Ensure your CustomDropdown uses this for a hidden input */}
-            <CustomDropdown name="projectType" dropdownValue={dropdownValue} label="Select Product Type"/>
+            <CustomDropdown name="projectType" dropdownValue={dropdownValue} label="Select a project type"/>
           </div>
 
           <div>
-            <label className="text-xs sm:text-sm mb-1 sm:mb-2 block">Budget Range *</label>
-            <CustomDropdown name="budgetRange" dropdownValue={dropdownValue2} label="Select Product Budget" />
+            <label className="text-[11px] uppercase tracking-[0.2em] text-taupe mb-1 block">Budget Range *</label>
+            <CustomDropdown name="budgetRange" dropdownValue={dropdownValue2} label="Select a budget" />
           </div>
 
           <div className="md:col-span-2">
-            <label className="text-xs sm:text-sm mb-1 sm:mb-2 block">Project Details *</label>
+            <label className="text-[11px] uppercase tracking-[0.2em] text-taupe mb-1 block">Project Details *</label>
             <textarea
               name="projectDetails" // Added name
               required
               rows={4}
-              className="w-full text-sm sm:text-base bg-[#FFFFFF0D] border border-white/10 rounded-2xl px-4 py-3 outline-none focus:border-pink-500 transition resize-none"
-              placeholder="Tell us about your project..."
+              className="field resize-none"
+              placeholder="Tell us about the fragrance you have in mind..."
             />
           </div>
 
@@ -114,15 +114,14 @@ export function ContactSection() {
             <button
               type="submit"
               disabled={isPending}
-              className={`mt-4 w-full transition text-white py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium 
-                ${isPending ? "bg-gray-600 cursor-not-allowed" : "bg-pink-500 hover:bg-pink-600"}`}
+              className={`btn-primary mt-4 w-full py-4 ${isPending ? "opacity-50 cursor-not-allowed" : ""}`}
             >
               {isPending ? "Sending..." : "Send Message"}
             </button>
 
             {/* 4. Display Feedback */}
             {state.message && (
-              <p className={`mt-4 text-center text-sm ${state.success ? "text-green-400" : "text-red-400"}`}>
+              <p className={`mt-4 text-center text-sm ${state.success ? "text-champagne" : "text-[#d9917f]"}`}>
                 {state.message}
               </p>
             )}

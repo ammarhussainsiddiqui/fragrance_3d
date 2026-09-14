@@ -63,7 +63,7 @@ export function Sound() {
       
       <button
         onClick={toggleSound}
-        className="sound-btn fixed bottom-8 right-8 z-50 flex items-center gap-3 px-4 py-2 bg-black/80 backdrop-blur-md border border-white/10 rounded-full text-white transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl group"
+        className="sound-btn fixed bottom-8 right-8 z-50 flex items-center gap-3 px-4 py-2 bg-ink/80 backdrop-blur-md border border-ivory/15 rounded-full text-ivory transition-all duration-300 hover:border-champagne/60 active:scale-95 group"
       >
         <AudioWave isPlaying={isPlaying} />
         

@@ -14,8 +14,8 @@ export default function Pagination({ pageCount, currentPage }) {
         <Link
           key={i}
           href={`/blog?page=${i}`}
-          className={`px-4 py-2 mx-1 rounded-full ${
-            currentPage === i ? 'bg-black text-white' : 'bg-transparent text-pink-400  hover:text-pink-500 border-1'
+          className={`px-4 py-2 mx-1 rounded-full font-sans text-sm transition-colors ${
+            currentPage === i ? 'bg-ivory text-ink' : 'bg-transparent text-champagne hover:text-ivory border border-ivory/20'
           }`}
         >
           {i}
@@ -29,8 +29,8 @@ export default function Pagination({ pageCount, currentPage }) {
     <div className="flex justify-center items-center mt-12">
       <Link
         href={`/blog?page=${Math.max(1, currentPage - 1)}`}
-        className={`px-4 py-2 mx-1 rounded-md ${
-          currentPage === 1 ? 'bg-transparent text-gray-400 cursor-not-allowed ' : 'bg-transparent text-pink-400  hover:text-pink-500'
+        className={`px-4 py-2 mx-1 rounded-md font-sans text-xs uppercase tracking-[0.2em] ${
+          currentPage === 1 ? 'bg-transparent text-stone cursor-not-allowed ' : 'bg-transparent text-champagne hover:text-ivory'
         }`}
         aria-disabled={currentPage === 1}
         tabIndex={currentPage === 1 ? -1 : undefined}
@@ -40,8 +40,8 @@ export default function Pagination({ pageCount, currentPage }) {
       {renderPageNumbers()}
       <Link
         href={`/blog?page=${Math.min(pageCount, currentPage + 1)}`}
-        className={`px-4 py-2 mx-1 rounded-md ${
-          currentPage === pageCount ? 'bg-transparent text-gray-400 cursor-not-allowed' : 'bg-transparent text-pink-400  hover:text-pink-500'
+        className={`px-4 py-2 mx-1 rounded-md font-sans text-xs uppercase tracking-[0.2em] ${
+          currentPage === pageCount ? 'bg-transparent text-stone cursor-not-allowed' : 'bg-transparent text-champagne hover:text-ivory'
         }`}
         aria-disabled={currentPage === pageCount}
         tabIndex={currentPage === pageCount ? -1 : undefined}

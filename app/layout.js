@@ -1,4 +1,4 @@
-import { Lato, Playfair_Display } from 'next/font/google'
+import { Jost, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import Header from '../components/Header'
@@ -6,39 +6,38 @@ import LayoutWrapper from '../components/LayoutWrapper'
 import { LoaderProvider } from '../lib/LoaderContext'
 import PageLoader from './PageLoader'
 import { Sound } from '../components/Sound'
+import { brand } from '../lib/brand'
 
-const lato = Lato({
+const jost = Jost({
   subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-lato',
+  variable: '--font-jost',
+  display: 'swap',
 })
 
 const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-playfair-display',
+  style: ['normal', 'italic'],
+  variable: '--font-playfair',
+  display: 'swap',
 })
 
 export const metadata = {
-  title: 'Cosmetic Chemist',
-  description:
-    'Connecting top-tier Cosmetic Chemists and Formulators with innovative brands to create exceptional products',
+  title: `${brand.name} — ${brand.descriptor}`,
+  description: brand.description,
   icons: {
-    icon: [
-      { url: 'fav.png', media: '(prefers-color-scheme: light)' },
-      { url: 'fav.png', media: '(prefers-color-scheme: dark)' },
-      { url: 'fav.png', type: 'image/svg+xml' },
-    ],
-    apple: 'fav.png',
+    icon: [{ url: '/fav.svg', type: 'image/svg+xml' }],
+    apple: '/fav.svg',
   },
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${lato.variable} ${playfairDisplay.variable} font-sans bg-black`}
-      >
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${jost.variable} ${playfairDisplay.variable}`}
+    >
+      <body className="font-sans bg-ink text-ivory">
         <Header />
 
 

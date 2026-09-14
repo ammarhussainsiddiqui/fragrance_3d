@@ -8,15 +8,19 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image.js'
-import { Users, Lightbulb, Clock } from "lucide-react"
+import { Leaf, Sparkles, Clock } from "lucide-react"
 import { products } from '../../../lib/products.js'
-import Model from '../../../components/model.jsx'
+import PerfumeBottle from '../../../components/PerfumeBottle.jsx'
 import Header from '../../../components/Header.jsx'
+import Logo from '../../../components/Logo.jsx'
+import { brand } from '../../../lib/brand.js'
 
 
 import { ScrollerContext } from '../../../lib/ScrollerContext';
 
 gsap.registerPlugin(ScrollTrigger)
+
+const BENEFIT_ICONS = { leaf: Leaf, sparkles: Sparkles, clock: Clock }
 
 export default function ProductDetailPage() {
 
@@ -30,7 +34,7 @@ export default function ProductDetailPage() {
 
   if (!product) {
     return (
-      <div className="w-full h-screen flex items-center justify-center text-white pt-24">
+      <div className="w-full h-screen flex items-center justify-center text-ivory pt-24">
         Product not found
       </div>
     )
@@ -127,7 +131,7 @@ export default function ProductDetailPage() {
           animateModal({
             left: '75%',
             top: '50%',
- 
+
             opacity: 1,
             zIndex: 30,
           })
@@ -136,7 +140,7 @@ export default function ProductDetailPage() {
           animateModal({
             left: '75%',
             top: '50%',
-   
+
             opacity: 1,
             zIndex: 30,
           })
@@ -154,7 +158,7 @@ export default function ProductDetailPage() {
           animateModal({
             left: '25%',
             top: '50%',
-         
+
             opacity: 1,
             zIndex: 30,
           })
@@ -163,7 +167,7 @@ export default function ProductDetailPage() {
           animateModal({
             left: '25%',
             top: '50%',
-   
+
             opacity: 1,
             zIndex: 30,
           })
@@ -181,7 +185,7 @@ export default function ProductDetailPage() {
           animateModal({
             left: '50%',
             top: '50%',
- 
+
             opacity: 1,
             zIndex: 30,
             scale: 0.8,
@@ -210,7 +214,7 @@ export default function ProductDetailPage() {
           animateModal({
             left: '50%',
             top: '50%',
-  
+
             opacity: 1,
             zIndex: 30,
             scale: 1,
@@ -220,7 +224,7 @@ export default function ProductDetailPage() {
           animateModal({
             left: '50%',
             top: '50%',
- 
+
             opacity: 1,
             zIndex: 30,
             scale: 1,
@@ -305,7 +309,7 @@ export default function ProductDetailPage() {
           animateModal({
             left: '50%',
             top: '30%',
-           
+
             opacity: 1,
             zIndex: 30,
             scale: 1,
@@ -315,7 +319,7 @@ export default function ProductDetailPage() {
           animateModal({
             left: '50%',
             top: '30%',
-           
+
             opacity: 1,
             zIndex: 30,
             scale: 1,
@@ -363,6 +367,12 @@ export default function ProductDetailPage() {
     '--y': '50%',
   };
 
+  const StepTitle = ({ step }) => (
+    <h3 className="font-display text-xl text-ivory mb-2">
+      <span className="text-champagne italic">{step.number}</span> {step.title}
+    </h3>
+  );
+
   return (
     <>
       <Header />
@@ -370,7 +380,7 @@ export default function ProductDetailPage() {
       {/* MAIN SCROLL + SNAP CONTAINER */}
       <main
         ref={mainRef}
-        className="w-full h-screen overflow-y-scroll snap-y snap-mandatory bg-black no-scrollbar scroll-smooth"
+        className="w-full h-screen overflow-y-scroll snap-y snap-mandatory bg-ink no-scrollbar scroll-smooth"
       >
         {/* FIXED MODAL */}
         <div
@@ -380,39 +390,35 @@ export default function ProductDetailPage() {
         >
           <Canvas
             shadows
-    
+            gl={{ alpha: true, antialias: true }}
+            resize={{ offsetSize: true }}
             camera={{ position: [15, 0, 0], fov: 20 }}
           >
             {/* Ambient Light */}
-            <ambientLight intensity={0.4} />
+            <ambientLight intensity={0.35} />
 
             {/* Key Light */}
             <directionalLight
               position={[8, 8, 10]}
-              intensity={1.8}
-              castShadow
-              shadow-mapSize-width={2048}
-              shadow-mapSize-height={2048}
+              intensity={1.2}
+              color="#fff6e8"
             />
 
             {/* Fill */}
-            <directionalLight position={[-6, 4, 6]} intensity={1.0} />
+            <directionalLight position={[-6, 4, 6]} intensity={0.6} />
 
             {/* Rim */}
-            <directionalLight position={[0, 5, -10]} intensity={1.2} />
-
-            {/* Soft Top Light */}
-            <directionalLight position={[0, 10, 5]} intensity={0.6} />
-
-            <hemisphereLight skyColor="#ffffff" groundColor="#888888" intensity={0.3} />
+            <directionalLight position={[0, 5, -10]} intensity={0.8} color="#cdb98e" />
 
             <OrbitControls enableZoom={false} enablePan={false} enableRotate />
 
             {/* CLEAN, CENTERED MODEL */}
-            <Model
-              modelPath={product.modelPath}
-              position={[0, 0.3, -0.2]}     // true center
-              rotation={[0, 0.4, 0.4]}   // subtle natural rotation
+            <PerfumeBottle
+              variant={product.variant}
+              scale={1.3}
+              position={[0, 0, 0]}
+              rotation={[0, 0.4, 0.35]}
+              quality="low"
             />
           </Canvas>
         </div>
@@ -426,13 +432,14 @@ export default function ProductDetailPage() {
           {/* ---------------------- */}
           <section
             ref={section1Ref}
-            className="snap-start h-screen flex flex-col justify-center px-10 md:px-20 text-white"
+            className="snap-start h-screen flex flex-col justify-center px-10 md:px-20 text-ivory"
           >
-            <h1 className="text-5xl md:text-7xl font-black uppercase">{product.name}</h1>
-            <p className="text-lg md:text-xl text-white/80 mt-4 max-w-md">
+            <p className="eyebrow mb-4">{brand.name}</p>
+            <h1 className="font-display text-5xl md:text-7xl font-normal">{product.name}</h1>
+            <p className="text-lg md:text-xl text-taupe font-light mt-5 max-w-md">
               {product.description}
             </p>
-            <p className="text-sm font-mono mt-2 text-white/60">{product.volume}</p>
+            <p className="font-sans text-xs uppercase tracking-[0.2em] mt-4 text-ivory/60">{product.volume}</p>
           </section>
 
           {/* ---------------------- */}
@@ -440,13 +447,14 @@ export default function ProductDetailPage() {
           {/* ---------------------- */}
           <section
             ref={section2Ref}
-            className="snap-start h-screen flex flex-col justify-center text-right px-10 md:px-20 text-white "
+            className="snap-start h-screen flex flex-col justify-center text-right px-10 md:px-20 text-ivory "
           >
-            <h1 className="text-5xl md:text-7xl font-black uppercase">{product.name}</h1>
-            <p style={{ marginLeft: 'auto' }} className="text-lg md:text-xl text-white/80 mt-4 max-w-md ">
+            <p className="eyebrow mb-4">Notes</p>
+            <h1 className="font-display text-5xl md:text-7xl font-normal">{product.name}</h1>
+            <p style={{ marginLeft: 'auto' }} className="text-lg md:text-xl text-taupe font-light mt-5 max-w-md ">
               {product.description}
             </p>
-            <p className="text-sm font-mono mt-2 text-white/60 ">{product.volume}</p>
+            <p className="font-sans text-xs uppercase tracking-[0.2em] mt-4 text-ivory/60 ">{product.volume}</p>
 
           </section>
 
@@ -460,8 +468,8 @@ export default function ProductDetailPage() {
             <div className="max-w-7xl mx-auto w-full flex flex-col items-center justify-center">
 
               {/* Heading */}
-              <h2 style={{ marginBottom: '-7%', marginTop: '10%' }} className="text-4xl lg:text-5xl font-bold text-center text-white text-balance">
-                Process
+              <h2 style={{ marginBottom: '-7%', marginTop: '10%' }} className="font-display text-4xl lg:text-5xl font-normal text-center text-ivory text-balance">
+                The Process
               </h2>
 
               {/* Desktop Layout */}
@@ -475,10 +483,8 @@ export default function ProductDetailPage() {
 
                   {/* Top Left */}
                   <div className="absolute top-30 left-30 w-80">
-                    <h3 className="text-xl font-bold text-white mb-2">
-                      <span className="text-pink-500">{processSteps[0].number}</span> {processSteps[0].title}
-                    </h3>
-                    <p className="text-gray-300 text-sm leading-relaxed">
+                    <StepTitle step={processSteps[0]} />
+                    <p className="text-taupe font-light text-sm leading-relaxed">
                       {processSteps[0].description}
                     </p>
                     <div className="mt-4 flex items-start">
@@ -487,17 +493,15 @@ export default function ProductDetailPage() {
                         alt='line'
                         width={240}
                         height={240}
-                        className="object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] group-hover:scale-105 transition-transform duration-300 ml-10"
+                        className="object-contain opacity-60 ml-10"
                       />
                     </div>
                   </div>
 
                   {/* Top Right */}
                   <div className="absolute top-30 right-30 w-80 text-right">
-                    <h3 className="text-xl font-bold text-white mb-2">
-                      <span className="text-pink-500">{processSteps[1].number}</span> {processSteps[1].title}
-                    </h3>
-                    <p className="text-gray-300 text-sm leading-relaxed">
+                    <StepTitle step={processSteps[1]} />
+                    <p className="text-taupe font-light text-sm leading-relaxed">
                       {processSteps[1].description}
                     </p>
                     <div className="mt-4 flex items-start justify-end">
@@ -506,7 +510,7 @@ export default function ProductDetailPage() {
                         alt='line'
                         width={240}
                         height={240}
-                        className="object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] group-hover:scale-105 transition-transform duration-300 mr-10"
+                        className="object-contain opacity-60 mr-10"
                       />
                     </div>
                   </div>
@@ -516,10 +520,8 @@ export default function ProductDetailPage() {
 
                     {/* Text Block */}
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-white mb-2">
-                        <span className="text-pink-500">{processSteps[2].number}</span> {processSteps[2].title}
-                      </h3>
-                      <p className="text-gray-300 text-sm leading-relaxed">
+                      <StepTitle step={processSteps[2]} />
+                      <p className="text-taupe font-light text-sm leading-relaxed">
                         {processSteps[2].description}
                       </p>
                     </div>
@@ -531,7 +533,7 @@ export default function ProductDetailPage() {
                         alt="line"
                         width={100}
                         height={100}
-                        className="drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-transform duration-300 group-hover:scale-105"
+                        className="opacity-60"
                       />
                     </div>
 
@@ -545,14 +547,12 @@ export default function ProductDetailPage() {
                         alt="line"
                         width={100}
                         height={100}
-                        className="drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-transform duration-300 group-hover:scale-105"
+                        className="opacity-60"
                       />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-white mb-2">
-                        <span className="text-pink-500">{processSteps[3].number}</span> {processSteps[3].title}
-                      </h3>
-                      <p className="text-gray-300 text-sm leading-relaxed">
+                      <StepTitle step={processSteps[3]} />
+                      <p className="text-taupe font-light text-sm leading-relaxed">
                         {processSteps[3].description}
                       </p>
                     </div>
@@ -567,13 +567,11 @@ export default function ProductDetailPage() {
                         alt='line'
                         width={240}
                         height={240}
-                        className="object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] group-hover:scale-105 transition-transform duration-300 ml-10"
+                        className="object-contain opacity-60 ml-10"
                       />
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-2">
-                      <span className="text-pink-500">{processSteps[4].number}</span> {processSteps[4].title}
-                    </h3>
-                    <p className="text-gray-300 text-sm leading-relaxed">
+                    <StepTitle step={processSteps[4]} />
+                    <p className="text-taupe font-light text-sm leading-relaxed">
                       {processSteps[4].description}
                     </p>
                   </div>
@@ -586,13 +584,11 @@ export default function ProductDetailPage() {
                         alt='line'
                         width={240}
                         height={240}
-                        className="object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] group-hover:scale-105 transition-transform duration-300 mr-10"
+                        className="object-contain opacity-60 mr-10"
                       />
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-2">
-                      <span className="text-pink-500">{processSteps[5].number}</span> {processSteps[5].title}
-                    </h3>
-                    <p className="text-gray-300 text-sm leading-relaxed">
+                    <StepTitle step={processSteps[5]} />
+                    <p className="text-taupe font-light text-sm leading-relaxed">
                       {processSteps[5].description}
                     </p>
                   </div>
@@ -611,17 +607,17 @@ export default function ProductDetailPage() {
                   {processSteps.map((step) => (
                     <div
                       key={step.id}
-                      className="bg-gray-950 rounded-lg p-6 border border-gray-800"
+                      className="bg-ink-soft/60 rounded-lg p-6 border border-ivory/10"
                     >
-                      <h3 className="text-lg font-bold text-white mb-2">
-                        <span className="text-pink-500 text-2xl">{step.number}</span>{" "}
+                      <h3 className="font-display text-lg text-ivory mb-2">
+                        <span className="text-champagne italic text-2xl">{step.number}</span>{" "}
                         {step.title}
                       </h3>
-                      <p className="text-gray-300 text-sm leading-relaxed">
+                      <p className="text-taupe font-light text-sm leading-relaxed">
                         {step.description}
                       </p>
 
-                      <div className="mt-4 h-1 w-8 bg-gradient-to-r from-pink-500 to-transparent rounded"></div>
+                      <div className="mt-4 h-px w-8 bg-champagne"></div>
                     </div>
                   ))}
                 </div>
@@ -634,11 +630,11 @@ export default function ProductDetailPage() {
           {/* SECTION 4 — CLINICAL  */}
           {/* ---------------------- */}
 
-          <section ref={section4Ref} className="snap-start h-screen  bg-black py-12 md:py-24 px-4 sm:px-6 lg:px-8">
+          <section ref={section4Ref} className="snap-start h-screen  bg-ink py-12 md:py-24 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
               {/* Title */}
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-12 md:mb-20">
-                Why Choose Us
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal text-ivory text-center mb-12 md:mb-20">
+                Why the Atelier
               </h2>
 
               {/* Desktop Layout */}
@@ -648,20 +644,25 @@ export default function ProductDetailPage() {
                 {/* Center Image */}
 
 
-                {product.benefits.map((benefit, index) => (
-                  <div key={index} className="text-white text-center">
-                    <div className="flex items-center justify-center ">
-                      <div className="relative w-full h-72">
+                {product.benefits.map((benefit, index) => {
+                  const Icon = BENEFIT_ICONS[benefit.icon] || Sparkles
+                  return (
+                    <div key={index} className="text-ivory text-center">
+                      <div className="flex items-center justify-center ">
+                        <div className="relative w-full h-72">
 
+                        </div>
                       </div>
+                      <div className="flex justify-center mb-6">
+                        <span className="w-14 h-14 rounded-full border border-champagne/40 text-champagne flex items-center justify-center">
+                          <Icon className="w-6 h-6" strokeWidth={1.25} />
+                        </span>
+                      </div>
+                      <h3 className="font-sans text-sm uppercase tracking-[0.18em] mb-4">{benefit.title}</h3>
+                      <p className="text-taupe font-light text-sm leading-relaxed">{benefit.description}</p>
                     </div>
-                    <div className="flex justify-center mb-4">
-                      <span className="w-16 h-16 text-pink-500" >{benefit.icon}</span>
-                    </div>
-                    <h3 className="text-2xl font-bold mb-3">{benefit.title}</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">{benefit.description}</p>
-                  </div>
-                ))}
+                  )
+                })}
 
 
               </div>
@@ -675,32 +676,32 @@ export default function ProductDetailPage() {
           {/* ---------------------- */}
           <section
             ref={section5Ref}
-            className="relative min-h-screen flex flex-col items-center justify-center px-8 md:px-16 lg:px-24 py-20 snap-start bg-black text-white"
+            className="relative min-h-screen flex flex-col items-center justify-center px-8 md:px-16 lg:px-24 py-20 snap-start bg-ink text-ivory"
           >
             {/* Section Header */}
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-5xl md:text-6xl font-black mb-6">
-                Cosmetic Chemistry
+              <h2 className="font-display text-5xl md:text-6xl font-normal mb-6">
+                The Collection
               </h2>
-              <p className="text-gray-400 leading-relaxed">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              <p className="text-taupe font-light leading-relaxed">
+                Four numbered eaux de parfum, each composed around a single rare natural.
               </p>
             </div>
 
             {/* Products Grid */}
             <div
               ref={gridRef}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 max-w-7xl w-full overflow-visible"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl w-full overflow-visible"
             >
               {products.map((item) => (
                 <div
                   key={item.id}
                   // Attach ref only to the active product's card
                   ref={item.slug === product.slug ? activeCardRef : null}
-                  className="product-card relative rounded-3xl p-8 text-center shadow-2xl cursor-pointer group overflow-visible bg-transparent"
+                  className="product-card relative rounded-3xl p-8 text-center cursor-pointer group overflow-visible bg-ivory text-ink border border-ivory transition-all duration-500 hover:-translate-y-1.5"
                 >
-                  <div className="absolute inset-0 z-[1] pointer-events-none flex items-start justify-center">
-                    <div className="w-[90%] h-[70%] bg-gradient-to-b from-white/40 to-transparent rounded-t-full blur-[0px]" />
+                  <div className="absolute inset-0 z-[1] pointer-events-none flex items-start justify-center overflow-hidden rounded-3xl">
+                    <div className="w-full h-[62%] bg-gradient-to-b from-cream to-transparent" />
                   </div>
 
                   <Link href={`/products/${item.slug}`}>
@@ -711,13 +712,13 @@ export default function ProductDetailPage() {
                             src={item.imagePath}
                             alt={item.name}
                             width={240}
-                            height={240}
-                            className="object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] group-hover:scale-105 transition-transform duration-300"
+                            height={300}
+                            className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500"
                           />}
                       </div>
 
-                      <h3 className="text-2xl font-bold mb-2">{item.name}</h3>
-                      <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
+                      <h3 className="font-display text-xl mb-3 text-charcoal">{item.name}</h3>
+                      <p className="text-stone font-light text-sm leading-relaxed line-clamp-3">
                         {item.description}
                       </p>
                     </div>
@@ -735,22 +736,22 @@ export default function ProductDetailPage() {
             {/* Full-screen Section */}
             <section
               ref={sectionRef}
-              className="relative flex-1 flex items-center justify-center bg-black snap-start"
+              className="relative flex-1 flex items-center justify-center bg-ink snap-start"
             >
               {/* Main Text */}
               <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
                 <h1
-                  className="text-5xl md:text-[6rem] lg:text-[10rem] xl:text-[13rem] font-black text-center select-none w-full px-4"
+                  className="font-display italic font-normal text-5xl md:text-[6rem] lg:text-[10rem] xl:text-[13rem] text-center select-none w-full px-4"
                   style={{
                     ...textAnimation,
-                    color: 'white',
-                    WebkitTextFillColor: 'white',
-                    WebkitTextStroke: '3px white',
-                    lineHeight: '1.1',
+                    color: '#f4efe6',
+                    WebkitTextFillColor: '#f4efe6',
+                    WebkitTextStroke: '1px #f4efe6',
+                    lineHeight: '1.05',
                   }}
                 >
-                  <div className="flex justify-center"><span className='mb-[-30] tracking-widest font-light'>Cosmetic</span></div>
-                  <div className="flex justify-center"><span className='mt-[-30] tracking-widest font-light'>Chemist</span></div>
+                  <div className="flex justify-center"><span className='mb-[-30] tracking-wide'>{brand.house}</span></div>
+                  <div className="flex justify-center"><span className='mt-[-30] tracking-wide'>{brand.mark}</span></div>
                 </h1>
               </div>
 
@@ -766,46 +767,43 @@ export default function ProductDetailPage() {
               {/* Outline Text */}
               <div className="absolute inset-0 z-30 flex items-center justify-center w-full pointer-events-none">
                 <h1
-                  className="text-5xl md:text-[6rem] lg:text-[10rem] xl:text-[13rem] font-black text-center select-none w-full px-4"
+                  className="font-display italic font-normal text-5xl md:text-[6rem] lg:text-[10rem] xl:text-[13rem] text-center select-none w-full px-4"
                   style={{
                     ...textAnimation,
                     color: 'transparent',
-                    WebkitTextStroke: '1px white',
-                    lineHeight: '1.1',
+                    WebkitTextStroke: '1px rgba(244,239,230,0.75)',
+                    lineHeight: '1.05',
                   }}
                 >
-                  <div className="flex justify-center"><span className='mb-[-30] tracking-widest font-light'>Cosmetic</span></div>
-                  <div className="flex justify-center"><span className='mt-[-30] tracking-widest font-light'>Chemist</span></div>
+                  <div className="flex justify-center"><span className='mb-[-30] tracking-wide'>{brand.house}</span></div>
+                  <div className="flex justify-center"><span className='mt-[-30] tracking-wide'>{brand.mark}</span></div>
                 </h1>
               </div>
             </section>
 
             {/* Footer with Glassy Effect */}
-            <footer className="w-full relative py-12 z-40">
-              {/* Glassy / frosted background */}
-              <div className="absolute inset-0 -z-10 bg-gradient-to-t from-white/20 via-transparent "></div>
-
+            <footer className="w-full relative py-12 z-40 border-t border-ivory/10">
               {/* Bottom Gradient */}
-              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black via-transparent to-transparent -z-20"></div>
+              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ink via-transparent to-transparent -z-20"></div>
 
               <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 px-8">
                 {/* Left Section */}
                 <div className="flex flex-col items-center md:items-start mb-6 md:mb-0 w-full md:w-1/4">
-                  <img src="../full-logo.png" alt="Cosmetic Chemist Logo" className="w-32 mb-4" />
-                  <p className="text-md text-center text-white md:text-left max-w-md mb-4 font-light">
-                    Your premier platform connecting cosmetic chemists with innovative brands.
+                  <Logo className="mb-5" />
+                  <p className="text-sm text-center text-taupe md:text-left max-w-md mb-4 font-light">
+                    {brand.tagline} Numbered eaux de parfum, composed in small editions.
                   </p>
                   <div className="flex justify-center md:justify-start gap-6">
-                    <a href="#" className="text-white hover:text-pink-500">
+                    <a href="#" className="text-ivory/70 hover:text-champagne">
                       <i className="fab fa-facebook"></i>
                     </a>
-                    <a href="#" className="text-white hover:text-pink-500">
+                    <a href="#" className="text-ivory/70 hover:text-champagne">
                       <i className="fab fa-twitter"></i>
                     </a>
-                    <a href="#" className="text-white hover:text-pink-500">
+                    <a href="#" className="text-ivory/70 hover:text-champagne">
                       <i className="fab fa-linkedin"></i>
                     </a>
-                    <a href="#" className="text-white hover:text-pink-500">
+                    <a href="#" className="text-ivory/70 hover:text-champagne">
                       <i className="fab fa-instagram"></i>
                     </a>
                   </div>
@@ -813,47 +811,47 @@ export default function ProductDetailPage() {
 
                 {/* Quick Links */}
                 <div className="w-full md:w-1/4 mb-6 md:mb-0">
-                  <h4 className="text-lg font-semibold mb-4 font-light text-white">Quick Links</h4>
-                  <ul className="space-y-2 font-light">
-                    <li><a href="#" className="text-white hover:text-pink-500">Home</a></li>
-                    <li><a href="#" className="text-white hover:text-pink-500">About Us</a></li>
-                    <li><a href="#" className="text-white hover:text-pink-500">Services</a></li>
-                    <li><a href="#" className="text-white hover:text-pink-500">Database</a></li>
-                    <li><a href="#" className="text-white hover:text-pink-500">Blog</a></li>
+                  <h4 className="eyebrow mb-5">Quick Links</h4>
+                  <ul className="space-y-3 font-light text-sm">
+                    <li><a href="/" className="text-ivory/80 hover:text-champagne">Home</a></li>
+                    <li><a href="/about" className="text-ivory/80 hover:text-champagne">About Us</a></li>
+                    <li><a href="/services" className="text-ivory/80 hover:text-champagne">Services</a></li>
+                    <li><a href="#" className="text-ivory/80 hover:text-champagne">Stockists</a></li>
+                    <li><a href="/blog" className="text-ivory/80 hover:text-champagne">Blog</a></li>
                   </ul>
                 </div>
 
                 {/* Resources */}
                 <div className="w-full md:w-1/4">
-                  <h4 className="text-lg font-semibold mb-4 font-light text-white">Resources</h4>
-                  <ul className="space-y-2 font-light">
-                    <li><a href="#" className="text-white hover:text-pink-500">Chemical Database</a></li>
-                    <li><a href="#" className="text-white hover:text-pink-500">Formula Library</a></li>
-                    <li><a href="#" className="text-white hover:text-pink-500">Regulatory Guides</a></li>
-                    <li><a href="#" className="text-white hover:text-pink-500">FAQ</a></li>
+                  <h4 className="eyebrow mb-5">Resources</h4>
+                  <ul className="space-y-3 font-light text-sm">
+                    <li><a href="#" className="text-ivory/80 hover:text-champagne">Notes Library</a></li>
+                    <li><a href="#" className="text-ivory/80 hover:text-champagne">Refill Programme</a></li>
+                    <li><a href="#" className="text-ivory/80 hover:text-champagne">Care Guide</a></li>
+                    <li><a href="/faq" className="text-ivory/80 hover:text-champagne">FAQ</a></li>
                   </ul>
                 </div>
 
                 {/* Contact */}
                 <div className="w-full md:w-1/4">
-                  <h4 className="text-lg font-semibold mb-4 font-light text-white">Contact</h4>
-                  <p className="mb-2 font-light">
-                    <a href="mailto:info@cosmeticchemist.com" className="text-white hover:text-pink-500">info@cosmeticchemist.com</a>
+                  <h4 className="eyebrow mb-5">Contact</h4>
+                  <p className="mb-3 font-light text-sm">
+                    <a href={`mailto:${brand.email}`} className="text-ivory/80 hover:text-champagne">{brand.email}</a>
                   </p>
-                  <p className="mb-2 font-light">
-                    <a href="tel:+18005551234" className="text-white hover:text-pink-500">+1 (800) 555-1234</a>
+                  <p className="mb-3 font-light text-sm">
+                    <a href={`tel:${brand.phone.replace(/[^\d+]/g, '')}`} className="text-ivory/80 hover:text-champagne">{brand.phone}</a>
                   </p>
-                  <p className="mb-2 text-white">123 Innovation Way, New York, NY 10001</p>
+                  <p className="mb-3 text-ivory/80 font-light text-sm">{brand.address}</p>
                 </div>
               </div>
 
               {/* Footer Bottom */}
-              <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 px-8 border-t border-white/10 text-white/40 pt-6 mt-8">
-                <p className="text-sm font-light">&copy; {new Date().getFullYear()} Cosmetic Chemist. All Rights Reserved.</p>
+              <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 px-8 border-t border-ivory/10 text-ivory/40 pt-6 mt-8">
+                <p className="text-xs font-light tracking-wide">&copy; {new Date().getFullYear()} {brand.name}. All Rights Reserved.</p>
                 <div className="flex gap-6">
-                  <a href="#" className="hover:text-white transition text-sm font-light">Privacy Policy</a>
-                  <a href="#" className="hover:text-white transition text-sm font-light">Terms of Service</a>
-                  <a href="#" className="hover:text-white transition text-sm font-light">Cookie Policy</a>
+                  <a href="/privacy-policy" className="hover:text-champagne transition text-xs font-light">Privacy Policy</a>
+                  <a href="/term-service" className="hover:text-champagne transition text-xs font-light">Terms of Service</a>
+                  <a href="/cookie-policy" className="hover:text-champagne transition text-xs font-light">Cookie Policy</a>
                 </div>
               </div>
             </footer>

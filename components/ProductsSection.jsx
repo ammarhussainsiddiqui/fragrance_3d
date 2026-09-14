@@ -21,14 +21,32 @@ export function ProductsSection() {
 
   // ✅ Defaults (only used when API data is missing)
   const DEFAULTS = {
-    heroTitle: "Default Title",
-    heroDescription: "Default Description",
+    heroTitle: "The Collection",
+    heroDescription: "Four numbered eaux de parfum, each composed around a single rare natural. Concentrated, refillable, and finished by hand in the atelier.",
     products: [
       {
         id: "default-1",
-        name: "Product Name",
-        description: "No Description",
-        imagePath: "/images/product5.png",
+        name: "Nº 01 — Bois d'Ambre",
+        description: "Smoked cedar and labdanum over a warm amber base. Top notes of pink pepper and bergamot; a heart of iris and ambrette.",
+        imagePath: "/images/bottle-amber-light.png",
+      },
+      {
+        id: "default-2",
+        name: "Nº 02 — Fleur Noire",
+        description: "Night-blooming tuberose and black orchid, grounded in oud and vetiver. A floral composed for the evening.",
+        imagePath: "/images/bottle-noir-light.png",
+      },
+      {
+        id: "default-3",
+        name: "Nº 03 — Sel Blanc",
+        description: "Sea salt, fig leaf and white musk. A luminous citrus opening that dries down to warm, sun-bleached driftwood.",
+        imagePath: "/images/bottle-clair-light.png",
+      },
+      {
+        id: "default-4",
+        name: "Nº 04 — Encens Vert",
+        description: "Frankincense and green galbanum with a heart of violet leaf. Resinous, cool and quietly ceremonial.",
+        imagePath: "/images/bottle-vert-light.png",
       },
     ],
   };
@@ -123,43 +141,43 @@ export function ProductsSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-8 md:px-16 lg:px-24 py-20 snap-start bg-black text-white">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-8 md:px-16 lg:px-24 py-20 snap-start bg-ink text-ivory">
       <div className="text-center  mx-auto mb-16">
-        <h2 className="text-5xl md:text-6xl font-black mb-6">
+        <h2 className="font-display text-5xl md:text-6xl font-normal mb-6">
           {heroTitle}
         </h2>
-        <p className="text-gray-300 max-w-[1100px] leading-relaxed">
+        <p className="text-taupe font-light max-w-[720px] mx-auto leading-relaxed">
           {heroDescription}
         </p>
       </div>
 
       <div
         ref={gridRef}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 max-w-7xl w-full overflow-visible"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl w-full overflow-visible"
       >
         {finalProducts.map((product) => (
           <div
             key={product.id}
             onClick={() => handleProductClick(product)}
-            className="product-card relative rounded-3xl p-8 text-center shadow-2xl cursor-pointer group overflow-visible bg-transparent"
+            className="product-card relative rounded-3xl p-8 text-center cursor-pointer group overflow-visible bg-ivory text-ink border border-ivory transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]"
           >
-            <div className="absolute inset-0 z-[1] pointer-events-none flex items-start justify-center">
-              <div className="w-[90%] h-[98%] bg-gradient-to-b from-white/40 to-transparent rounded-t-full blur-[0px]" />
+            <div className="absolute inset-0 z-[1] pointer-events-none flex items-start justify-center overflow-hidden rounded-3xl">
+              <div className="w-full h-[62%] bg-gradient-to-b from-cream to-transparent" />
             </div>
             {/* <Link href={`/products/${product.slug}`}> */}
             <div className="product-content relative z-[5]">
-              <div className="w-full h-56 flex items-center justify-center mb-8">
+              <div className="w-full h-64 flex items-center justify-center mb-8">
                 <Image
                   // src={`${API_URI}${product.imagePath.replace('/api', '')}`}
                   src={product.imagePath}
                   alt={product.name}
                   width={240}
-                  height={240}
-                  className="object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] group-hover:scale-105 transition-transform duration-300"
+                  height={300}
+                  className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <h3 className="text-2xl font-bold mb-2 text-left">{product.name}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 text-left">
+              <h3 className="font-display text-xl mb-3 text-left text-charcoal">{product.name}</h3>
+              <p className="text-stone text-sm leading-relaxed line-clamp-3 text-left font-light">
                 {product.description}
               </p>
             </div>

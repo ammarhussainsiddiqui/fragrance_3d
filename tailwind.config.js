@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+// Note: Tailwind v4 reads design tokens from `@theme` in app/globals.css.
+// This file is kept in sync for tooling that still reads a v3-style config.
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,15 +10,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'brand-pink': '#E8A0B9',
-        'brand-pink-dark': '#D18AA3',
-        'brand-beige': '#FDF6F3',
-        'brand-dark': '#2F2F2F',
-        'brand-light': '#FBFBFB',
+        ink: '#0e0d0b',
+        'ink-soft': '#16140f',
+        'ink-line': '#2a2620',
+        ivory: '#f4efe6',
+        cream: '#e9e2d4',
+        taupe: '#a89d8d',
+        stone: '#6f6659',
+        champagne: '#cdb98e',
+        'champagne-deep': '#a8925f',
+        charcoal: '#1c1a17',
       },
       fontFamily: {
-          sans: ['Brooklyn', 'sans-serif'],
-        brooklyn: ['Brooklyn', 'sans-serif'],
+        sans: ['var(--font-jost)', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        display: ['var(--font-playfair)', 'Georgia', 'serif'],
       },
     },
   },

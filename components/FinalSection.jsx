@@ -2,12 +2,12 @@
 
 import { useEffect, useRef, useContext } from 'react';
 import { Canvas } from '@react-three/fiber';
-import Model from './model';
+import PerfumeBottle from './PerfumeBottle';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollerContext } from '../lib/ScrollerContext';
 import { motion, useAnimation } from 'framer-motion';
-import { Environment } from '@react-three/drei';
+import { brand } from '../lib/brand';
 
 export function FinalSection() {
   const controls = useAnimation();
@@ -114,7 +114,7 @@ export function FinalSection() {
       {/* Full-screen Section (hidden on mobile) */}
       <section
         ref={sectionRef}
-        className="relative flex-1 items-center justify-center bg-black snap-start hidden md:flex"
+        className="relative flex-1 items-center justify-center bg-ink snap-start hidden md:flex"
       >
         {/* Main Text */}
         <motion.div
@@ -125,17 +125,17 @@ export function FinalSection() {
           variants={textSlideVariants}
         >
           <h1
-            className="text-5xl md:text-[6rem] lg:text-[10rem] xl:text-[13rem] font-black text-center select-none w-full px-4"
+            className="font-display italic font-normal text-5xl md:text-[6rem] lg:text-[10rem] xl:text-[13rem] text-center select-none w-full px-4"
             style={{
               ...textAnimation,
-              color: 'white',
-              WebkitTextFillColor: 'white',
-              WebkitTextStroke: '3px white',
-              lineHeight: '1.1',
+              color: '#f4efe6',
+              WebkitTextFillColor: '#f4efe6',
+              WebkitTextStroke: '1px #f4efe6',
+              lineHeight: '1.05',
             }}
           >
-            <div className="flex justify-center"><span className='mb-[-30] tracking-widest font-light'>Cosmetic</span></div>
-            <div className="flex justify-center"><span className='mt-[-30] tracking-widest font-light'>Chemist</span></div>
+            <div className="flex justify-center"><span className='mb-[-30] tracking-wide'>{brand.house}</span></div>
+            <div className="flex justify-center"><span className='mt-[-30] tracking-wide'>{brand.mark}</span></div>
           </h1>
         </motion.div>
 
@@ -151,34 +151,34 @@ export function FinalSection() {
             duration: 0.8
           }}
         >
-          <div className="w-60 h-60 mt-20 md:w-[22rem] md:h-[22rem] lg:w-[28rem] lg:h-[28rem] xl:w-[34rem] xl:h-[34rem]">
-            {/* <Canvas
-              camera={{ position: [0, 0, 10], fov: 10 }}
-              style={{ transform: 'rotate(-15deg) scale(1.15)' }}
-            > */}
+          <div className="w-60 h-60 md:w-[22rem] md:h-[22rem] lg:w-[28rem] lg:h-[28rem] xl:w-[34rem] xl:h-[34rem]">
             <Canvas
               // dpr={window.devicePixelRatio}
               camera={{ position: [0, 0, 15], fov: 15 }}
-              gl={{ antialias: true, powerPreference: "high-performance" }}
+              gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
+              // offsetSize: measure the untransformed box so the CSS rotate/scale
+              // below does not inflate the canvas and push the model off-centre
+              resize={{ offsetSize: true }}
               style={{ width: "100%", height: "100%", transform: "rotate(-15deg) scale(1.15)" }}
             >
-              <ambientLight intensity={0.6} />
+              <ambientLight intensity={0.3} />
 
               {/* Key directional light to highlight front label */}
-              <directionalLight position={[5, 8, 10]} intensity={2.5} />
+              <directionalLight position={[5, 8, 10]} intensity={1.4} color="#fff6e8" />
 
               {/* Fill light to soften shadows */}
-              <directionalLight position={[-5, 4, 8]} intensity={1.8} />
+              <directionalLight position={[-5, 4, 8]} intensity={0.7} />
 
               {/* Rim light to make edges pop */}
-              <directionalLight position={[0, 6, -10]} intensity={2.0} />
+              <directionalLight position={[0, 6, -10]} intensity={1.0} color="#cdb98e" />
 
               <group position={[0, 0, 0]}>
-                <Model
-                  scale={0.75}
-                  modelPath="/images/formula_c2.glb"
+                <PerfumeBottle
+                  variant="amber"
+                  scale={0.95}
                   rotation={[0, 0, 0]}
-                  position={[-0.5, 0.8, 0]}
+                  position={[0, 0, 0]}
+                  quality="low"
                 />
               </group>
             </Canvas>
@@ -198,16 +198,16 @@ export function FinalSection() {
           transition={{ delay: 0.2 }} // Slight delay for the second text
         >
           <h1
-            className="text-5xl md:text-[6rem] lg:text-[10rem] xl:text-[13rem] font-black text-center select-none w-full px-4"
+            className="font-display italic font-normal text-5xl md:text-[6rem] lg:text-[10rem] xl:text-[13rem] text-center select-none w-full px-4"
             style={{
               ...textAnimation,
               color: 'transparent',
-              WebkitTextStroke: '1px white',
-              lineHeight: '1.1',
+              WebkitTextStroke: '1px rgba(244,239,230,0.75)',
+              lineHeight: '1.05',
             }}
           >
-            <div className="flex justify-center"><span className='mb-[-30] tracking-widest font-light'>Cosmetic</span></div>
-            <div className="flex justify-center"><span className='mt-[-30] tracking-widest font-light'>Chemist</span></div>
+            <div className="flex justify-center"><span className='mb-[-30] tracking-wide'>{brand.house}</span></div>
+            <div className="flex justify-center"><span className='mt-[-30] tracking-wide'>{brand.mark}</span></div>
           </h1>
         </motion.div>
       </section>

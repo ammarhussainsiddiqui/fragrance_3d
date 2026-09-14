@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
-import Model from '../../components/model';
-import { Environment, OrbitControls } from '@react-three/drei';
+import PerfumeBottle from '../../components/PerfumeBottle';
+import { OrbitControls } from '@react-three/drei';
 
 export default function SpiderDetail({ processSteps }) {
   const scrollDown = (e) => {
@@ -31,12 +31,19 @@ export default function SpiderDetail({ processSteps }) {
   const stepFive = processSteps[4] || {};
   const stepSix = processSteps[5] || {};
 
+  const StepTitle = ({ number, fallback }) => (
+    <h3 className="font-display text-xl text-ivory mb-2">
+      <span className="text-champagne italic">Step</span> {number || fallback}
+    </h3>
+  );
+
   return (
     <section className="w-full py-16 md:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto w-full">
         {/* Heading */}
-        <h2 className="text-4xl lg:text-5xl font-bold text-center text-white ">
-          Process
+        <p className="eyebrow text-center mb-5">From Brief to Flacon</p>
+        <h2 className="font-display text-4xl lg:text-5xl font-normal text-center text-ivory ">
+          The Process
         </h2>
 
         {/* Desktop Layout - Hidden on mobile */}
@@ -46,39 +53,15 @@ export default function SpiderDetail({ processSteps }) {
             {/* Center Image */}
             <div className="w-full h-[60vh] flex justify-center mb-8">
               <Canvas
-                // style={{ transform: 'rotate(-10deg) scale(1.2)' }}
                 shadows
                 camera={{ position: [0, 0, 25], fov: 22 }}
+                gl={{ alpha: true, antialias: true }}
               >
-                <ambientLight intensity={0.55} />
-                <directionalLight
-                  position={[6, 6, 12]}
-                  intensity={2.0}
-                  castShadow={true}
-                  shadow-mapSize-width={2048}
-                  shadow-mapSize-height={2048}
-                />
-                <directionalLight
-                  position={[-6, 2, 10]}
-                  intensity={1.0}
-                  castShadow={false}
-                />
-                <directionalLight
-                  position={[0, -3, -10]}
-                  intensity={1.4}
-                  color={"#ffffff"}
-                />
-                <directionalLight
-                  position={[0, 10, 5]}
-                  intensity={0.8}
-                  castShadow={false}
-                />
-                <hemisphereLight
-                  skyColor={"#ffffff"}
-                  groundColor={"#666666"}
-                  intensity={0.5}
-                />
-                <Model scale={3.5} modelPath={`/images/ras.glb`} position={[0, 0, 0]} />
+                <ambientLight intensity={0.3} />
+                <directionalLight position={[6, 6, 12]} intensity={1.2} color="#fff6e8" />
+                <directionalLight position={[-6, 2, 10]} intensity={0.6} />
+                <directionalLight position={[0, -3, -10]} intensity={0.8} color="#cdb98e" />
+                <PerfumeBottle variant="noir" scale={2} position={[0, 0, 0]} quality="low" />
                 <OrbitControls enableZoom={false} />
               </Canvas>
 
@@ -86,10 +69,8 @@ export default function SpiderDetail({ processSteps }) {
 
             {/* Step One */}
             <div className="absolute top-0 left-0 md:top-8 md:left-8 lg:top-16 lg:left-16 xl:top-24 xl:left-24 w-48 sm:w-64 md:w-72 lg:w-80">
-              <h3 className="text-xl font-bold text-white mb-2">
-                <span className="text-pink-500">Step</span> {stepOne.stepNumber || 'One'}
-              </h3>
-              <p className="text-gray-300 text-sm leading-relaxed">
+              <StepTitle number={stepOne.stepNumber} fallback="One" />
+              <p className="text-taupe font-light text-sm leading-relaxed">
                 {stepOne.stepDescription || 'No description available for step one.'}
               </p>
               <div className="mt-4 flex items-start">
@@ -98,17 +79,15 @@ export default function SpiderDetail({ processSteps }) {
                   alt='line'
                   width={240}
                   height={240}
-                  className="object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] group-hover:scale-105 transition-transform duration-300 ml-10"
+                  className="object-contain opacity-60 ml-10"
                 />
               </div>
             </div>
 
             {/* Step Two */}
             <div className="absolute top-0 right-0 md:top-8 md:right-8 lg:top-16 lg:right-16 xl:top-24 xl:right-24 w-48 sm:w-64 md:w-72 lg:w-80 text-right">
-              <h3 className="text-xl font-bold text-white mb-2">
-                <span className="text-pink-500">Step</span> {stepTwo.stepNumber || 'Two'}
-              </h3>
-              <p className="text-gray-300 text-sm leading-relaxed">
+              <StepTitle number={stepTwo.stepNumber} fallback="Two" />
+              <p className="text-taupe font-light text-sm leading-relaxed">
                 {stepTwo.stepDescription || 'No description available for step two.'}
               </p>
               <div className="mt-4 flex items-start justify-end">
@@ -117,7 +96,7 @@ export default function SpiderDetail({ processSteps }) {
                   alt='line'
                   width={240}
                   height={240}
-                  className="object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] group-hover:scale-105 transition-transform duration-300 mr-10"
+                  className="object-contain opacity-60 mr-10"
                 />
               </div>
             </div>
@@ -125,10 +104,8 @@ export default function SpiderDetail({ processSteps }) {
             {/* Step Three */}
             <div className="absolute top-1/2 left-0 md:left-4 lg:left-12 -translate-y-1/2 w-48 sm:w-64 md:w-72 lg:w-80 flex items-center gap-2 sm:gap-4 md:gap-6">
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-white mb-2">
-                  <span className="text-pink-500">Step</span> {stepThree.stepNumber || 'Three'}
-                </h3>
-                <p className="text-gray-300 text-sm leading-relaxed">
+                <StepTitle number={stepThree.stepNumber} fallback="Three" />
+                <p className="text-taupe font-light text-sm leading-relaxed">
                   {stepThree.stepDescription || 'No description available for step three.'}
                 </p>
               </div>
@@ -138,7 +115,7 @@ export default function SpiderDetail({ processSteps }) {
                   alt="line"
                   width={100}
                   height={100}
-                  className="drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-transform duration-300 group-hover:scale-105"
+                  className="opacity-60"
                 />
               </div>
             </div>
@@ -151,14 +128,12 @@ export default function SpiderDetail({ processSteps }) {
                   alt="line"
                   width={100}
                   height={100}
-                  className="drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-transform duration-300 group-hover:scale-105"
+                  className="opacity-60"
                 />
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-white mb-2">
-                  <span className="text-pink-500">Step</span> {stepFour.stepNumber || 'Four'}
-                </h3>
-                <p className="text-gray-300 text-sm leading-relaxed">
+                <StepTitle number={stepFour.stepNumber} fallback="Four" />
+                <p className="text-taupe font-light text-sm leading-relaxed">
                   {stepFour.stepDescription || 'No description available for step four.'}
                 </p>
               </div>
@@ -172,13 +147,11 @@ export default function SpiderDetail({ processSteps }) {
                   alt='line'
                   width={240}
                   height={240}
-                  className="object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] group-hover:scale-105 transition-transform duration-300 ml-10"
+                  className="object-contain opacity-60 ml-10"
                 />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">
-                <span className="text-pink-500">Step</span> {stepFive.stepNumber || 'Five'}
-              </h3>
-              <p className="text-gray-300 text-sm leading-relaxed">
+              <StepTitle number={stepFive.stepNumber} fallback="Five" />
+              <p className="text-taupe font-light text-sm leading-relaxed">
                 {stepFive.stepDescription || 'No description available for step five.'}
               </p>
             </div>
@@ -191,13 +164,11 @@ export default function SpiderDetail({ processSteps }) {
                   alt='line'
                   width={240}
                   height={240}
-                  className="object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] group-hover:scale-105 transition-transform duration-300 mr-10"
+                  className="object-contain opacity-60 mr-10"
                 />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">
-                <span className="text-pink-500">Step</span> {stepSix.stepNumber || 'Six'}
-              </h3>
-              <p className="text-gray-300 text-sm leading-relaxed">
+              <StepTitle number={stepSix.stepNumber} fallback="Six" />
+              <p className="text-taupe font-light text-sm leading-relaxed">
                 {stepSix.stepDescription || 'No description available for step six.'}
               </p>
             </div>
@@ -206,15 +177,15 @@ export default function SpiderDetail({ processSteps }) {
         </div>
 
         {/* Mobile Layout - Vertical Steps */}
-        <div className="lg:hidden mt-12 space-y-12">
+        <div className="lg:hidden mt-12 space-y-8">
           {processSteps.map((step, index) => {
             const { stepNumber, stepDescription } = step;
             return (
-              <div key={index} className="bg-gray-900 bg-opacity-50 rounded-2xl p-6 backdrop-blur-sm">
-                <h3 className="text-2xl font-bold text-white mb-3">
-                  <span className="text-pink-500">Step</span> {stepNumber || 'Step'}
+              <div key={index} className="bg-ink-soft/60 border border-ivory/10 rounded-2xl p-6">
+                <h3 className="font-display text-2xl text-ivory mb-3">
+                  <span className="text-champagne italic">Step</span> {stepNumber || 'Step'}
                 </h3>
-                <p className="text-gray-300 text-base leading-relaxed">
+                <p className="text-taupe font-light text-base leading-relaxed">
                   {stepDescription || 'No description available for this step.'}
                 </p>
               </div>
